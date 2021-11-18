@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - UScan</title>
+      {% else %}
+      <title>Welcome to Uscan home page</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>UScan: <a href="/index">D&L Scan </a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
