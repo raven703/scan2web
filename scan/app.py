@@ -17,9 +17,12 @@ def index():  # put application's code here
         data = get_chars_from_local(form.text.data)
         char_affil = requests.post('https://esi.evetech.net/latest/characters/affiliation/', headers=headers,
                                    params=params, data=data).json()
-        total_alliance = count_ally(char_affil)["alliance"]
-        total_corp = count_ally(char_affil)["corporation"]
-        return render_template('scan.html', title='Scan result page', total_alliance=total_alliance, total_corp=total_corp)
+        # return sorted dict
+        total_alliance = dict(sorted(count_ally(char_affil)["alliance"].items(), key=lambda x: x[1], reverse=True))
+        total_corp = dict(sorted(count_ally(char_affil)["corporation"].items(), key=lambda x: x[1], reverse=True))
+
+        return render_template('scan.html', title='Scan result page', total_alliance=total_alliance,
+                               total_corp=total_corp)
 
     return render_template('index.html', title='Scan Page', form=form)
 

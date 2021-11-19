@@ -6,8 +6,13 @@
 
     <h1>Scan</h1>
     <p>
-    {{ total_alliance }}
-    {{ total_corp }}
+{#    {{ total_alliance }}#}
+    {% for key, value in total_alliance.items()  %}
+        <dt>{{ key }}</dt>
+        <dd>{{ value }}</dd>
+    {% endfor %}
+
+{#    {{ total_corp }}#}
     </p>
 
 {% endblock %}
