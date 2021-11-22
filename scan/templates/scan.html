@@ -15,4 +15,12 @@
 {#    {{ total_corp }}#}
     </p>
 
+    </p>
+     {% for key, value in total_corp.items()  %}
+        <dt>{{ key }}</dt>
+        <dd>{{ value }}</dd>
+    {% endfor %}
+
+    </p>
+
 {% endblock %}

@@ -64,20 +64,23 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
     #  на входе строка из имён
     data = [i for i in data.replace('\r', '').split('\n') if len(i) > 0]
     data = convert_to_tranq_post(data)  # преобразование в формат пост запроса сервера. передаётся список
-    print(data)
+    print(f'raw data {data}')
     data = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
                          data=data).json()
-    print(data)
-    cid_list = []
-    for names in data['characters']:
-        for cid in names:
-            cid_list.append(names[cid])
-            break
-    return convert_to_tranq_post(cid_list)
+    print(f'server answer universe IDs {data}')
+    if 'characters' in data:
+        cid_list = []
+        for names in data['characters']:
+            for cid in names:
+                cid_list.append(names[cid])
+                break
+        return convert_to_tranq_post(cid_list)
+    return False
 
 
-def count_ally(char_affil):
+def count_ally(char_affil: list):
     common = {'alliance': {}, 'corporation': {}}  # dict for counting numbers
+    print(f'server return char affilation {char_affil}')
     with open("alliance_data.json", "r") as f:
         ally_data = json.load(f)  # dict for all alliances {'UID':name}
     with open("corp_data.json", "r") as f:
@@ -85,9 +88,8 @@ def count_ally(char_affil):
     if 'error' in char_affil:
         return char_affil
 
-
-
     for dicts in char_affil:
+        ally_flag = False
         for k, v in dicts.items():  # k, for key ally or corp and v for UID value of both
             if k == 'alliance_id':
                 v = ally_data.setdefault(str(v),
@@ -95,18 +97,19 @@ def count_ally(char_affil):
                 # check for UID in global dict, return if TRUE, add if False
                 common['alliance'].setdefault(v, 0)  # count entries, total {UID: count} ex. {99007629: 2}
                 common['alliance'][v] += 1  # count entries
-            elif k == 'corporation_id':
+                ally_flag = True
+
+            elif k == 'corporation_id' and ally_flag:
                 v = corp_data.setdefault(str(v), f'{get_corporation_info(v).name}  [{get_corporation_info(v).ticker}]')
                 common['corporation'].setdefault(v, 0)
                 common['corporation'][v] += 1
+            elif k == 'corporation_id':
                 common['alliance'].setdefault('No alliance', 0)
                 common['alliance']['No alliance'] += 1
-
 
     with open("alliance_data.json", "w") as f:
         json.dump(ally_data, f)
     with open("corp_data.json", "w") as f:
         json.dump(corp_data, f)
-    # print(common)
 
     return common
