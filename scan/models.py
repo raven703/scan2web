@@ -4,8 +4,8 @@ from datetime import datetime
 
 class UserDB(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.String(64), index=True, unique=False)
-    name = db.Column(db.String(64), index=True, unique=False)
+    uid = db.Column(db.String(64), index=True, unique=True)
+    name = db.Column(db.String(64), index=True, unique=True)
     alliance = db.Column(db.String(64), index=True, unique=False)
     a_ticker = db.Column(db.String(64), index=True, unique=False)
     a_id = db.Column(db.String(64), index=True, unique=False)

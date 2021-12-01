@@ -2,6 +2,9 @@ from esipy import EsiApp
 from esipy import EsiClient
 import requests
 import json
+from flask_sqlalchemy import SQLAlchemy
+from scan.models import UserDB
+from app import db
 
 headers = {
     'accept': 'application/json',
@@ -59,23 +62,92 @@ def convert_to_tranq_post(data: list) -> str:  # convert to Tranq POST string fo
     result = f"{result.strip(',')} ]"
     return result
 
+def check_chars_from_local(data: str):
+    raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
+    request_list = []
+    cid_list = []
+    for name in raw_data:
+        user = UserDB.query.filter(UserDB.name == name).first()
+        if user is None:
+            request_list.append(name)
+        else:
+            uid = UserDB.query.filter(UserDB.name == name).first()
+            cid_list.append(uid.uid)
+    print(f'total queries to server {len(request_list)}')
+    print(f'total queries to DB {len(cid_list)}')
+
+    if len(request_list) > 0:
+        data_id = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
+                      data=convert_to_tranq_post(request_list)).json()
+           # get chars ID from server
+        if 'characters' in data_id:
+            for slovar in data_id['characters']:
+                cid_list.append(slovar['id']) # list for chars ID
+                char_info = get_char_info(slovar['id'])
+                if 'alliance_id' in list(char_info):
+                    u = UserDB(uid=slovar['id'], name=slovar['name'], a_id=char_info.alliance_id, c_id = char_info.corporation_id)
+                else:
+                    u = UserDB(uid=slovar['id'], name=slovar['name'], c_id=char_info.corporation_id)
+
+                db.session.add(u)
+                db.session.commit()
+    return convert_to_tranq_post(cid_list)
+
+
+
+
+
 
 def get_chars_from_local(data: str):  # возвращает ID перс. из локала, преобразует их в формат ПОСТ запроса
     #  на входе строка из имён
-    data = [i for i in data.replace('\r', '').split('\n') if len(i) > 0]
-    data = convert_to_tranq_post(data)  # преобразование в формат пост запроса сервера. передаётся список
-    print(f'raw data {data}')
-    data = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
+    raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
+    print(f'before conversion: {raw_data}')
+    request_data = []
+    exist_data = []
+    cid_list = []
+    data = []
+    for name in raw_data:
+        user = UserDB.query.filter(UserDB.name == name).first()
+        if user is None:
+            request_data.append(name)
+
+        else:
+            exist_data.append(name)
+            print(user.name, user.uid)
+
+
+    data = convert_to_tranq_post(request_data)  # преобразование в формат пост запроса сервера. передаётся список
+    # неизвестных имён
+    # запрос у сервера, передаётся список имён, в ответ UID
+    if len(request_data) > 0:
+        uid_data_req = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
                          data=data).json()
-    print(f'server answer universe IDs {data}')
-    if 'characters' in data:
-        cid_list = []
-        for names in data['characters']:
-            for cid in names:
-                cid_list.append(names[cid])
-                break
+        print(f'total requests from server {len(uid_data_req)}')
+    else:
+        uid_data_req = []
+    # print(f'server answer universe IDs {uid_data}')
+    if 'characters' in uid_data_req:
+        for slovar in uid_data_req['characters']:
+            cid_list.append(slovar['id'])
+            u = UserDB(uid=slovar['id'], name=slovar['name'])
+            db.session.add(u)
+            db.session.commit()
+
+    if len(exist_data) > 0:
+        print(f'total requests from DB {len(exist_data)}')
+        for name in exist_data:
+            user = UserDB.query.filter(UserDB.name == name).first()
+            cid_list.append(user.uid)
+
+
+
+    if len(cid_list) > 0:
         return convert_to_tranq_post(cid_list)
-    return False
+    else:
+        return False
+
+
+
 
 
 def count_ally(char_affil: list):
