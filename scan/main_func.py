@@ -62,8 +62,9 @@ def convert_to_tranq_post(data: list) -> str:  # convert to Tranq POST string fo
     result = f"{result.strip(',')} ]"
     return result
 
-def check_chars_from_local(data: str):
+def check_chars_from_local(data: str) -> str:
     raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
+
     request_list = []
     cid_list = []
     for name in raw_data:
@@ -75,6 +76,7 @@ def check_chars_from_local(data: str):
             cid_list.append(uid.uid)
     print(f'total queries to server {len(request_list)}')
     print(f'total queries to DB {len(cid_list)}')
+    print(f'total queries {len(request_list)+len(cid_list)}')
 
     if len(request_list) > 0:
         data_id = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
@@ -91,7 +93,8 @@ def check_chars_from_local(data: str):
 
                 db.session.add(u)
                 db.session.commit()
-    return convert_to_tranq_post(cid_list)
+
+    return convert_to_tranq_post(cid_list), cid_list
 
 
 
@@ -147,12 +150,22 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
         return False
 
 
+def aff_new(charid: list):
+    aff_list = []
+    for uid in charid:
+        char_data = UserDB.query.filter(UserDB.uid == uid).first()
+        if char_data.a_id:
+            aff_list.append({'alliance_id': int(char_data.a_id), 'character_id': int(uid), 'corporation_id': int(char_data.c_id)})
+        else:
+            aff_list.append({'character_id': int(uid), 'corporation_id': int(char_data.c_id)})
+
+    return aff_list
 
 
 
 def count_ally(char_affil: list):
     common = {'alliance': {}, 'corporation': {}}  # dict for counting numbers
-    print(f'server return char affilation {char_affil}')
+    # print(f'server return char affilation {char_affil}')
     with open("alliance_data.json", "r") as f:
         ally_data = json.load(f)  # dict for all alliances {'UID':name}
     with open("corp_data.json", "r") as f:
