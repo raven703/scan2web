@@ -17,7 +17,7 @@ def index():  # put application's code here
     if form.validate_on_submit():
 
 
-        data, raw_data = check_chars_from_local(form.text.data)
+        data, raw_data, total_query = check_chars_from_local(form.text.data)
 
         if not data:
             return render_template('error.html', title='Error Page')
@@ -29,17 +29,13 @@ def index():  # put application's code here
             #                          params=params, data=data).json()
 
             ch_aff = aff_new(raw_data)
-            print(f'raw data is: {raw_data}')
-            print(f'formatted data is: {data}')
-            # print(f'affilation is: {aff_new(raw_data)}')
-            # print(f'orig affil is: {char_affil}')
-
-
-            # total_alliance = dict(sorted(count_ally(char_affil)["alliance"].items(), key=lambda x: x[1], reverse=True))
             total_alliance = dict(sorted(count_ally(ch_aff)["alliance"].items(), key=lambda x: x[1], reverse=True))
             total_corp = dict(sorted(count_ally(ch_aff)["corporation"].items(), key=lambda x: x[1], reverse=True))
+            total_count = count_ally(ch_aff)["total"]
+            total_corps = count_ally(ch_aff)["total_corps"]
 
             return render_template('scan.html', title='Scan result page',
-                                   total_alliance=total_alliance, total_corp=total_corp)
+                                   total_alliance=total_alliance, total_corp=total_corp, total_query=total_query,
+                                   total_count=total_count, total_corps=total_corps)
 
     return render_template('index.html', title='Scan Page', form=form)

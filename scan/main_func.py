@@ -63,10 +63,13 @@ def convert_to_tranq_post(data: list) -> str:  # convert to Tranq POST string fo
     return result
 
 def check_chars_from_local(data: str) -> str:
+    # this func gets characters from local scan, check them in DB and if not: ask TRANQ for info and put into DB
+    # return 2 style data: raw as list and formatted as TRANQ post request
     raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
 
     request_list = []
     cid_list = []
+    total_query = {}
     for name in raw_data:
         user = UserDB.query.filter(UserDB.name == name).first()
         if user is None:
@@ -74,9 +77,11 @@ def check_chars_from_local(data: str) -> str:
         else:
             uid = UserDB.query.filter(UserDB.name == name).first()
             cid_list.append(uid.uid)
-    print(f'total queries to server {len(request_list)}')
-    print(f'total queries to DB {len(cid_list)}')
-    print(f'total queries {len(request_list)+len(cid_list)}')
+    # print(f'total queries to server {len(request_list)}')
+    # print(f'total queries to DB {len(cid_list)}')
+    # print(f'total queries {len(request_list)+len(cid_list)}')
+    total_query['TRANQ_Server'] = len(request_list)
+    total_query['Database'] = len(cid_list)
 
     if len(request_list) > 0:
         data_id = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
@@ -94,7 +99,7 @@ def check_chars_from_local(data: str) -> str:
                 db.session.add(u)
                 db.session.commit()
 
-    return convert_to_tranq_post(cid_list), cid_list
+    return convert_to_tranq_post(cid_list), cid_list, total_query
 
 
 
@@ -151,20 +156,23 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
 
 
 def aff_new(charid: list):
+    # this func makes affilataion style response swagger char affilation
     aff_list = []
     for uid in charid:
         char_data = UserDB.query.filter(UserDB.uid == uid).first()
-        if char_data.a_id:
-            aff_list.append({'alliance_id': int(char_data.a_id), 'character_id': int(uid), 'corporation_id': int(char_data.c_id)})
-        else:
+        if char_data.a_id is None:
             aff_list.append({'character_id': int(uid), 'corporation_id': int(char_data.c_id)})
+        else:
+            aff_list.append(
+                {'alliance_id': int(char_data.a_id), 'character_id': int(uid), 'corporation_id': int(char_data.c_id)})
+
 
     return aff_list
 
 
 
 def count_ally(char_affil: list):
-    common = {'alliance': {}, 'corporation': {}}  # dict for counting numbers
+    common = {'alliance': {}, 'corporation': {}, 'total': {}, 'total_corps': {}}  # dict for counting numbers
     # print(f'server return char affilation {char_affil}')
     with open("alliance_data.json", "r") as f:
         ally_data = json.load(f)  # dict for all alliances {'UID':name}
@@ -191,6 +199,17 @@ def count_ally(char_affil: list):
             elif k == 'corporation_id':
                 common['alliance'].setdefault('No alliance', 0)
                 common['alliance']['No alliance'] += 1
+                v = corp_data.setdefault(str(v), f'{get_corporation_info(v).name}  [{get_corporation_info(v).ticker}]')
+                common['corporation'].setdefault(v, 0)
+                common['corporation'][v] += 1
+
+    res = sum(common['alliance'].values())
+    if 'No alliance' in common['alliance']:
+        res = sum(common['alliance'].values()) - int(common['alliance']['No alliance'])
+    common['total'] = res
+
+    res = sum(common['corporation'].values())
+    common['total_corps'] = res
 
     with open("alliance_data.json", "w") as f:
         json.dump(ally_data, f)
