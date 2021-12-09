@@ -29,13 +29,15 @@ def index():  # put application's code here
             #                          params=params, data=data).json()
 
             ch_aff = aff_new(raw_data)
-            total_alliance = dict(sorted(count_ally(ch_aff)["alliance"].items(), key=lambda x: x[1], reverse=True))
-            total_corp = dict(sorted(count_ally(ch_aff)["corporation"].items(), key=lambda x: x[1], reverse=True))
-            total_count = count_ally(ch_aff)["total"]
-            total_corps = count_ally(ch_aff)["total_corps"]
+            common = count_ally(ch_aff)
+            total_alliance = dict(sorted(common["alliance"].items(), key=lambda x: x[1], reverse=True))
+            total_corp = dict(sorted(common["corporation"].items(), key=lambda x: x[1], reverse=True))
+            total_count = common["total"]
+            total_corps = common["total_corps"]
+            total_chars = common["total_chars"]
 
             return render_template('scan.html', title='Scan result page',
                                    total_alliance=total_alliance, total_corp=total_corp, total_query=total_query,
-                                   total_count=total_count, total_corps=total_corps)
+                                   total_count=total_count, total_corps=total_corps, total_chars=total_chars)
 
     return render_template('index.html', title='Scan Page', form=form)

@@ -2,6 +2,7 @@ from esipy import EsiApp
 from esipy import EsiClient
 import requests
 import json
+import datetime
 from flask_sqlalchemy import SQLAlchemy
 from scan.models import UserDB
 from app import db
@@ -62,6 +63,24 @@ def convert_to_tranq_post(data: list) -> str:  # convert to Tranq POST string fo
     result = f"{result.strip(',')} ]"
     return result
 
+def db_check_user(user):
+    year = user.timestamp.year
+    month = user.timestamp.month
+    day = user.timestamp.day
+    past_date = datetime.datetime(year, month, day)
+    now = datetime.datetime.utcnow()
+    delta = now - past_date
+    if delta.days > 5:
+        char = get_char_info(user.uid)
+        u = UserDB.query.filter(UserDB.name == user.name).first()
+        if 'alliance_id' in char:
+            u.a_id = char.alliance_id
+        u.c_id = char.corporation_id
+        u.timestamp = datetime.datetime.utcnow()
+        db.session.commit()
+
+    return
+
 def check_chars_from_local(data: str) -> str:
     # this func gets characters from local scan, check them in DB and if not: ask TRANQ for info and put into DB
     # return 2 style data: raw as list and formatted as TRANQ post request
@@ -75,11 +94,10 @@ def check_chars_from_local(data: str) -> str:
         if user is None:
             request_list.append(name)
         else:
-            uid = UserDB.query.filter(UserDB.name == name).first()
-            cid_list.append(uid.uid)
-    # print(f'total queries to server {len(request_list)}')
-    # print(f'total queries to DB {len(cid_list)}')
-    # print(f'total queries {len(request_list)+len(cid_list)}')
+            # uid = UserDB.query.filter(UserDB.name == name).first()
+            db_check_user(user)
+            cid_list.append(user.uid)
+
     total_query['TRANQ_Server'] = len(request_list)
     total_query['Database'] = len(cid_list)
 
@@ -156,7 +174,7 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
 
 
 def aff_new(charid: list):
-    # this func makes affilataion style response swagger char affilation
+    # this func makes affilataion swagger style response  char affilation
     aff_list = []
     for uid in charid:
         char_data = UserDB.query.filter(UserDB.uid == uid).first()
@@ -165,14 +183,12 @@ def aff_new(charid: list):
         else:
             aff_list.append(
                 {'alliance_id': int(char_data.a_id), 'character_id': int(uid), 'corporation_id': int(char_data.c_id)})
-
-
     return aff_list
 
 
 
 def count_ally(char_affil: list):
-    common = {'alliance': {}, 'corporation': {}, 'total': {}, 'total_corps': {}}  # dict for counting numbers
+    common = {'alliance': {}, 'corporation': {}, 'total': {}, 'total_corps': {}, 'total_chars': {}}  # dict for counting numbers
     # print(f'server return char affilation {char_affil}')
     with open("alliance_data.json", "r") as f:
         ally_data = json.load(f)  # dict for all alliances {'UID':name}
@@ -203,13 +219,14 @@ def count_ally(char_affil: list):
                 common['corporation'].setdefault(v, 0)
                 common['corporation'][v] += 1
 
-    res = sum(common['alliance'].values())
+    res = len(common['alliance'])
     if 'No alliance' in common['alliance']:
-        res = sum(common['alliance'].values()) - int(common['alliance']['No alliance'])
+        res -= 1
     common['total'] = res
 
-    res = sum(common['corporation'].values())
-    common['total_corps'] = res
+    common['total_corps'] = len(common['corporation'])
+
+    common['total_chars'] = len(char_affil)
 
     with open("alliance_data.json", "w") as f:
         json.dump(ally_data, f)
