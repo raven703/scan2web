@@ -70,7 +70,7 @@ def db_check_user(user):
     past_date = datetime.datetime(year, month, day)
     now = datetime.datetime.utcnow()
     delta = now - past_date
-    if delta.days > 5:
+    if delta.days > 7:
         char = get_char_info(user.uid)
         u = UserDB.query.filter(UserDB.name == user.name).first()
         if 'alliance_id' in char:
