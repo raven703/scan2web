@@ -34,6 +34,7 @@ def get_alliance_info(a_id):
         alliance_id=a_id,
         datasource='tranquility',
     )
+
     return client.request(get_alliance1).data
 
 
@@ -43,6 +44,7 @@ def get_corporation_info(c_id):
         datasource='tranquility',
     )
     response = client.request(get_corporation).data
+
     return response
 
 
@@ -94,7 +96,6 @@ def check_chars_from_local(data: str) -> str:
         if user is None:
             request_list.append(name)
         else:
-            # uid = UserDB.query.filter(UserDB.name == name).first()
             db_check_user(user)
             cid_list.append(user.uid)
 
@@ -189,7 +190,6 @@ def aff_new(charid: list):
 
 def count_ally(char_affil: list):
     common = {'alliance': {}, 'corporation': {}, 'total': {}, 'total_corps': {}, 'total_chars': {}}  # dict for counting numbers
-    # print(f'server return char affilation {char_affil}')
     with open("alliance_data.json", "r") as f:
         ally_data = json.load(f)  # dict for all alliances {'UID':name}
     with open("corp_data.json", "r") as f:
@@ -201,21 +201,26 @@ def count_ally(char_affil: list):
         ally_flag = False
         for k, v in dicts.items():  # k, for key ally or corp and v for UID value of both
             if k == 'alliance_id':
+                ally_info = get_alliance_info(v) if str(v) not in ally_data else None
                 v = ally_data.setdefault(str(v),
-                                         f'{get_alliance_info(v).name} [{get_alliance_info(v).ticker}]')
+                                         f'{ally_info.name} [{ally_info.ticker}]' if str(v) not in ally_data else None)
                 # check for UID in global dict, return if TRUE, add if False
                 common['alliance'].setdefault(v, 0)  # count entries, total {UID: count} ex. {99007629: 2}
                 common['alliance'][v] += 1  # count entries
                 ally_flag = True
 
             elif k == 'corporation_id' and ally_flag:
-                v = corp_data.setdefault(str(v), f'{get_corporation_info(v).name}  [{get_corporation_info(v).ticker}]')
+                corp_info = get_corporation_info(v) if str(v) not in corp_data else None
+                v = corp_data.setdefault(str(v),
+                                         f'{corp_info.name}  [{corp_info.ticker}]' if str(v) not in corp_data else None)
                 common['corporation'].setdefault(v, 0)
                 common['corporation'][v] += 1
             elif k == 'corporation_id':
+                # corp_info = get_corporation_info(v) if str(v) not in corp_data else None
                 common['alliance'].setdefault('No alliance', 0)
                 common['alliance']['No alliance'] += 1
-                v = corp_data.setdefault(str(v), f'{get_corporation_info(v).name}  [{get_corporation_info(v).ticker}]')
+                v = corp_data.setdefault(str(v),
+                                         f'{get_corporation_info(v).name}  [{get_corporation_info(v).ticker}]' if str(v) not in corp_data else None)
                 common['corporation'].setdefault(v, 0)
                 common['corporation'][v] += 1
 
