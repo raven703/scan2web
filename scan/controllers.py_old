@@ -1,12 +1,10 @@
 import time
 from flask import render_template
-from app import app, db
 
 from scan.forms import ScanForm
 from scan.main_func import *
 
-from scan.models import UserDB
-
+from app import app
 
 db.create_all()
 
@@ -17,23 +15,12 @@ def index():  # put application's code here
     form = ScanForm()
     if form.validate_on_submit():
         start_time = time.time()
-
-        if chr(9) in form.text.data:
-
-            ships_common = count_ships([i.split(chr(9)) for i in form.text.data.splitlines()])
-            ships_total = dict(sorted(ships_common['ships_total'].items(), key=lambda x: x[1], reverse=True))
-            types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
-
-            exec_time = round(time.time() - start_time, 3)
-
-            return render_template('ships.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total)
-
+        data, raw_data, total_query = check_chars_from_local(form.text.data)
+        if not data or 'error' in data:
+            return render_template('error.html', title='Error Page')
 
         else:
-            data, raw_data, total_query = check_chars_from_local(form.text.data)
-            if not data or 'error' in data:
-                return render_template('error.html', title='Error Page')
-
+            exec_time = round(time.time() - start_time, 3)
             ch_aff = aff_new(raw_data)
             common = count_ally(ch_aff)
             total_alliance = dict(sorted(common["alliance"].items(), key=lambda x: x[1], reverse=True))
@@ -41,7 +28,7 @@ def index():  # put application's code here
             total_count = common["total"]
             total_corps = common["total_corps"]
             total_chars = common["total_chars"]
-            exec_time = round(time.time() - start_time, 3)
+            
             return render_template('scan.html', title='Scan result page',
                                    total_alliance=total_alliance, total_corp=total_corp, total_query=total_query,
                                    total_count=total_count, total_corps=total_corps, total_chars=len(raw_data), exec_time=exec_time)
