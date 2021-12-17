@@ -3,6 +3,8 @@ from esipy import EsiClient
 import requests
 import json
 import datetime
+import re
+
 from flask_sqlalchemy import SQLAlchemy
 from scan.models import UserDB
 from app import db
@@ -86,7 +88,10 @@ def db_check_user(user):
 def check_chars_from_local(data: str) -> str:
     # this func gets characters from local scan, check them in DB and if not: ask TRANQ for info and put into DB
     # return 2 style data: raw as list and formatted as TRANQ post request
+    if re.search(r'[^a-zA-Z0-9 ]', data):
+        return 'error', 'error', 'error'
     raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
+
 
     request_list = []
     cid_list = []
