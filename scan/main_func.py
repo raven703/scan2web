@@ -4,9 +4,11 @@ import requests
 import json
 import datetime
 import re
+import uuid
 
 from flask_sqlalchemy import SQLAlchemy
 from scan.models import UserDB
+from scan.models import ShipDB
 from app import db
 
 headers = {
@@ -260,4 +262,9 @@ def count_ships(result: list) -> dict:
                 ships_common['types_total'].setdefault(key, 0)
                 ships_common['types_total'][key] += 1
                 break
+    url = uuid.uuid4().hex
+    u = ShipDB(data=json.dumps(ships_common), url=url)
+    db.session.add(u)
+    db.session.commit()
+
     return ships_common

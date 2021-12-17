@@ -23,7 +23,6 @@ def index():  # put application's code here
             ships_common = count_ships([i.split(chr(9)) for i in form.text.data.splitlines()])
             ships_total = dict(sorted(ships_common['ships_total'].items(), key=lambda x: x[1], reverse=True))
             types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
-
             exec_time = round(time.time() - start_time, 3)
 
             return render_template('ships.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total)
@@ -47,3 +46,17 @@ def index():  # put application's code here
                                    total_count=total_count, total_corps=total_corps, total_chars=len(raw_data), exec_time=exec_time)
 
     return render_template('index.html', title='Scan Page', form=form)
+
+
+@app.route('/<url>', methods=['GET'])
+def scan_url(url):
+    start_time = time.time()
+
+    dbScanResult = ShipDB.query.filter(ShipDB.url == url).first()
+    ships_common = json.loads(dbScanResult.data)
+    ships_total = dict(sorted(ships_common['ships_total'].items(), key=lambda x: x[1], reverse=True))
+    types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
+    exec_time = round(time.time() - start_time, 3)
+
+
+    return render_template('scan_url.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total)
