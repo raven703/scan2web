@@ -23,9 +23,10 @@ def index():  # put application's code here
             ships_common = count_ships([i.split(chr(9)) for i in form.text.data.splitlines()])
             ships_total = dict(sorted(ships_common['ships_total'].items(), key=lambda x: x[1], reverse=True))
             types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
+            url = f"/{ships_common['url']}"
             exec_time = round(time.time() - start_time, 3)
 
-            return render_template('ships.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total)
+            return render_template('ships.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total, url=url)
 
 
         else:
@@ -57,6 +58,7 @@ def scan_url(url):
     ships_total = dict(sorted(ships_common['ships_total'].items(), key=lambda x: x[1], reverse=True))
     types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
     exec_time = round(time.time() - start_time, 3)
+    url_name = f"/{ships_common['url']}"
 
 
-    return render_template('scan_url.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total)
+    return render_template('ships_url.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total, url=url_name)

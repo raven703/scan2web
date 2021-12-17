@@ -249,7 +249,7 @@ def count_ally(char_affil: list):
 
 
 def count_ships(result: list) -> dict:
-    ships_common = {'ships_total': {}, 'types_total': {}}
+    ships_common = {'ships_total': {}, 'types_total': {}, 'url': {}}
     with open('data.json', 'r', encoding='utf-8') as file:
         ships = json.load(file)
 
@@ -266,5 +266,6 @@ def count_ships(result: list) -> dict:
     u = ShipDB(data=json.dumps(ships_common), url=url)
     db.session.add(u)
     db.session.commit()
+    ships_common['url'] = url
 
     return ships_common
