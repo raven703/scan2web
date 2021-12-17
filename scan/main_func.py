@@ -239,3 +239,20 @@ def count_ally(char_affil: list):
         json.dump(corp_data, f)
 
     return common
+
+
+def count_ships(result: list) -> dict:
+    ships_common = {'ships_total': {}, 'types_total': {}}
+    with open('data.json', 'r', encoding='utf-8') as file:
+        ships = json.load(file)
+
+    for ship_name in result:
+        ships_common['ships_total'].setdefault(ship_name[2], 0)
+        ships_common['ships_total'][ship_name[2]] += 1
+
+        for key in ships.keys():
+            if ship_name[2] in ships[key]:
+                ships_common['types_total'].setdefault(key, 0)
+                ships_common['types_total'][key] += 1
+                break
+    return ships_common

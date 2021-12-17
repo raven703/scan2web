@@ -9,5 +9,5 @@ db = SQLAlchemy(app)
 
 from scan import controllers
 
-#if __name__ == '__main__':
-#    app.run()
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0')

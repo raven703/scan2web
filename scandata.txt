@@ -1,0 +1,231 @@
+12753	 ☾⊙☽KDP	Impel	117 km
+11202	.	Ares	-
+25	1kolka's Frozen Corpse	Corpse Male	-
+29148	3kolka's Frozen Corpse	Corpse Female	-
+48964	Abyssal Trace	Abyssal Trace	-
+48964	Abyssal Trace	Abyssal Trace	-
+48964	Abyssal Trace	Abyssal Trace	-
+27570	Angel Stasis Webification Battery	Angel Stasis Webification Battery	-
+33474	Astrahus Parts	Mobile Depot	-
+33474	Astrahus Parts 2	Mobile Depot	-
+33474	Astrahus Parts 3	Mobile Depot	-
+33474	Astrahus Parts 4	Mobile Depot	-
+33474	Astrahus Parts 5	Mobile Depot	-
+17184	Ballistic Deflection Array	Ballistic Deflection Array	-
+17184	Ballistic Deflection Array	Ballistic Deflection Array	-
+648	Bychok	Badger	3 342 km
+32880	C0pt3rs Venture	Venture	16 km
+23	Cargo Container	Cargo Container	-
+26585	Coreli Agent Wreck	Serpentis Small Wreck	-
+26585	Coreli Agent Wreck	Serpentis Small Wreck	-
+26585	Coreli Agent Wreck	Serpentis Small Wreck	-
+26585	Coreli Initiate Wreck	Serpentis Small Wreck	-
+26585	Coreli Initiate Wreck	Serpentis Small Wreck	-
+26585	Coreli Initiate Wreck	Serpentis Small Wreck	-
+26585	Coreli Scout Wreck	Serpentis Small Wreck	-
+26585	Coreli Scout Wreck	Serpentis Small Wreck	-
+26585	Coreli Scout Wreck	Serpentis Small Wreck	-
+26585	Coreli Scout Wreck	Serpentis Small Wreck	-
+26585	Coreli Scout Wreck	Serpentis Small Wreck	-
+26585	Coreli Scout Wreck	Serpentis Small Wreck	-
+26585	Coreli Spy Wreck	Serpentis Small Wreck	-
+26568	Corpatis Exorcist Wreck	Blood Medium Wreck	-
+2233	Customs Office (Perimeter II)	Customs Office	14,0 AU
+2233	Customs Office (Perimeter IV)	Customs Office	13,4 AU
+2233	Customs Office (Perimeter IX)	Customs Office	7,0 AU
+2233	Customs Office (Perimeter VII)	Customs Office	12,1 AU
+2233	Customs Office (Perimeter X)	Customs Office	44 870 km
+27646	Domination Medium Artillery Battery	Domination Medium Artillery Battery	-
+27649	Domination Medium AutoCannon Battery	Domination Medium AutoCannon Battery	-
+27649	Domination Medium AutoCannon Battery	Domination Medium AutoCannon Battery	-
+27649	Domination Medium AutoCannon Battery	Domination Medium AutoCannon Battery	-
+27649	Domination Medium AutoCannon Battery	Domination Medium AutoCannon Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+27585	Dread Guristas White Noise Generation Battery	Dread Guristas White Noise Generation Battery	-
+26468	Drone Hive Wreck	Wreck	-
+16242	Eric Trump-Merica's Thrasher	Thrasher	-
+17185	Explosion Dampening Array	Explosion Dampening Array	-
+17185	Explosion Dampening Array	Explosion Dampening Array	-
+17185	Explosion Dampening Array	Explosion Dampening Array	-
+17185	Explosion Dampening Array	Explosion Dampening Array	-
+27055	Federation Insidiator Wreck	Gallente Small Wreck	-
+27055	Federation Machaira Wreck	Gallente Small Wreck	-
+27055	Federation Pelekus Wreck	Gallente Small Wreck	-
+27055	Federation Pelekus Wreck	Gallente Small Wreck	-
+27055	Federation Praktor Balra Wreck	Gallente Small Wreck	-
+27055	Federation Praktor Belos Wreck	Gallente Small Wreck	-
+27055	Federation Praktor Belos Wreck	Gallente Small Wreck	-
+27055	Federation Praktor Belos Wreck	Gallente Small Wreck	-
+12236	Gallente Control Tower	Gallente Control Tower	-
+27583	Guristas White Noise Generation Battery	Guristas White Noise Generation Battery	-
+27583	Guristas White Noise Generation Battery	Guristas White Noise Generation Battery	-
+27583	Guristas White Noise Generation Battery	Guristas White Noise Generation Battery	-
+27583	Guristas White Noise Generation Battery	Guristas White Noise Generation Battery	-
+27583	Guristas White Noise Generation Battery	Guristas White Noise Generation Battery	-
+17186	Heat Dissipation Array	Heat Dissipation Array	-
+17186	Heat Dissipation Array	Heat Dissipation Array	-
+17186	Heat Dissipation Array	Heat Dissipation Array	-
+12753	Impel	Impel	-
+16	Jita	Stargate (Caldari System)	3 324 km
+601	Legend674's Ibis	Ibis	-
+16	Maurasi	Stargate (Caldari System)	20 971 km
+16691	Medium Railgun Battery	Medium Railgun Battery	-
+16691	Medium Railgun Battery	Medium Railgun Battery	-
+16691	Medium Railgun Battery	Medium Railgun Battery	-
+16691	Medium Railgun Battery	Medium Railgun Battery	-
+16691	Medium Railgun Battery	Medium Railgun Battery	-
+16691	Medium Railgun Battery	Medium Railgun Battery	-
+33474	Mobile Depot	Mobile Depot	-
+33474	Mobile Depot	Mobile Depot	-
+650	Nereus	Nereus	-
+16	Niyabainen	Stargate (Caldari System)	46 096 km
+20064	P7 M1 Blocker	Gallente Control Tower Small	-
+20064	P7 M2 Blocker	Gallente Control Tower Small	-
+35832	Perimeter - Cassiopeia	Astrahus	2 740 958 km
+47513	Perimeter - Darkside of the Tower	'Draccous' Fortizar	3 279 km
+35825	Perimeter - Highsec Citadel Spam	Raitaru	4 701 km
+35832	Perimeter - Hot Sauce Emporium	Astrahus	5,2 AU
+35832	Perimeter - Long Lost Incan City Of Gold	Astrahus	2 198 km
+35832	Perimeter - NT Waypoint	Astrahus	1 790 km
+35832	Perimeter - Outpost	Astrahus	5,2 AU
+35832	Perimeter - Spectrum Squad	Astrahus	5 382 269 km
+35825	Perimeter - Sushi Bar	Raitaru	5 811 168 km
+35833	Perimeter - TEST War Headquarters	Fortizar	2 002 km
+35832	Perimeter - TSOTH Eviction Outpost	Astrahus	4 652 km
+35832	Perimeter - TSOTH War Headquarters	Astrahus	3 979 km
+35827	Perimeter - Tranquility Production Center	Sotiyo	4 902 km
+35827	Perimeter - Tranquility Research Labs	Sotiyo	6 426 km
+35836	Perimeter - Tranquility T2 Refinery	Tatara	1 815 km
+35834	Perimeter - Tranquility Trading Tower	Keepstar	0 m
+35832	Perimeter - Yummy Mummy Yoga Pants Factory	Astrahus	24 066 km
+2016	Perimeter II	Planet (Barren)	14,0 AU
+15	Perimeter II - Asteroid Belt 1	Asteroid Belt	13,9 AU
+14	Perimeter II - Moon 1	Moon	14,0 AU
+1529	Perimeter II - Moon 1 - Caldari Navy Assembly Plant	Caldari Administrative Station	14,0 AU
+1929	Perimeter II - Moon 1 - Ducia Foundry Mineral Reserve	Amarr Standard Station	14,0 AU
+11	Perimeter IV	Planet (Temperate)	13,4 AU
+2016	Perimeter IX	Planet (Barren)	7,0 AU
+1529	Perimeter IX - Caldari Constructions Production Plant	Caldari Administrative Station	7,0 AU
+11	Perimeter VII	Planet (Temperate)	12,1 AU
+14	Perimeter VII - Moon 1	Moon	12,1 AU
+14	Perimeter VII - Moon 2	Moon	12,1 AU
+4023	Perimeter VII - Poksu Mineral Group Mineral Reserve	Caldari Mining Station	12,1 AU
+13	Perimeter X	Planet (Gas)	35 158 km
+15	Perimeter X - Asteroid Belt 1	Asteroid Belt	6 281 962 km
+14	Perimeter X - Moon 1	Moon	772 750 km
+14	Perimeter X - Moon 2	Moon	2 864 721 km
+17187	Photon Scattering Array	Photon Scattering Array	-
+17187	Photon Scattering Array	Photon Scattering Array	-
+17187	Photon Scattering Array	Photon Scattering Array	-
+17187	Photon Scattering Array	Photon Scattering Array	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Arrogator Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Imputor Wreck	Guristas Small Wreck	-
+26573	Pithi Infiltrator Wreck	Guristas Small Wreck	-
+26573	Pithi Infiltrator Wreck	Guristas Small Wreck	-
+26573	Pithi Infiltrator Wreck	Guristas Small Wreck	-
+26573	Pithi Invader Wreck	Guristas Small Wreck	-
+26573	Pithi Invader Wreck	Guristas Small Wreck	-
+26573	Pithi Invader Wreck	Guristas Small Wreck	-
+26573	Pithi Invader Wreck	Guristas Small Wreck	-
+26573	Pithi Invader Wreck	Guristas Small Wreck	-
+26573	Pithi Plunderer Wreck	Guristas Small Wreck	-
+26573	Pithi Wrecker Wreck	Guristas Small Wreck	-
+26573	Pithi Wrecker Wreck	Guristas Small Wreck	-
+26591	Ripper Alvior Wreck	Rogue Small Wreck	-
+26935	Rogue Pirate Grunt Wreck	Mission Generic Small Wreck	-
+27567	Serpentis Warp Scrambling Battery	Serpentis Warp Scrambling Battery	-
+27779	Shadow Sensor Dampening Battery	Shadow Sensor Dampening Battery	-
+27779	Shadow Sensor Dampening Battery	Shadow Sensor Dampening Battery	-
+27779	Shadow Sensor Dampening Battery	Shadow Sensor Dampening Battery	-
+27779	Shadow Sensor Dampening Battery	Shadow Sensor Dampening Battery	-
+27779	Shadow Sensor Dampening Battery	Shadow Sensor Dampening Battery	-
+27779	Shadow Sensor Dampening Battery	Shadow Sensor Dampening Battery	-
+27565	Shadow Warp Disruption Battery	Shadow Warp Disruption Battery	-
+27565	Shadow Warp Disruption Battery	Shadow Warp Disruption Battery	-
+27565	Shadow Warp Disruption Battery	Shadow Warp Disruption Battery	-
+27565	Shadow Warp Disruption Battery	Shadow Warp Disruption Battery	-
+27565	Shadow Warp Disruption Battery	Shadow Warp Disruption Battery	-
+27565	Shadow Warp Disruption Battery	Shadow Warp Disruption Battery	-
+12237	Ship Maintenance Array	Ship Maintenance Array	-
+16690	Small Railgun Battery	Small Railgun Battery	-
+16690	Small Railgun Battery	Small Railgun Battery	-
+16690	Small Railgun Battery	Small Railgun Battery	-
+16690	Small Railgun Battery	Small Railgun Battery	-
+16690	Small Railgun Battery	Small Railgun Battery	-
+16690	Small Railgun Battery	Small Railgun Battery	-
+27058	Thukker Mercenary Elite Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Elite Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Elite Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Elite Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Elite Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Fighter Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Rookie Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Rookie Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Rookie Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Rookie Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Rookie Wreck	Thukker Small Wreck	-
+27058	Thukker Mercenary Rookie Wreck	Thukker Small Wreck	-
+27856	True Sansha Energy Neutralizing Battery	True Sansha Energy Neutralizing Battery	-
+27856	True Sansha Energy Neutralizing Battery	True Sansha Energy Neutralizing Battery	-
+26592	Violator Alvum Wreck	Rogue Medium Wreck	-
+26592	Violator Alvum Wreck	Rogue Medium Wreck	-
+26592	Violator Alvum Wreck	Rogue Medium Wreck	-
+26592	Violator Alvum Wreck	Rogue Medium Wreck	-
+17177	White Noise Generation Battery	White Noise Generation Battery	-
+17177	White Noise Generation Battery	White Noise Generation Battery	-
+17177	White Noise Generation Battery	White Noise Generation Battery	-
+26585	Wreck of: Environmental Terrorists	Serpentis Small Wreck	-
+26585	Wreck of: Environmental Terrorists	Serpentis Small Wreck	-
+29365	Wreck of: Industrial (Suspicious)	Mission Faction Industrials Wreck	-
+652	_.-0-._	Mammoth	3 295 km
+670	region58 Capsule	Capsule	3 343 km
+657	ГАЗ-АА "Полуторка"	Iteron Mark V	-
+33474	Українські ПВП вильоти  (ДЕТАЛІ - БІО)	Mobile Depot	3 366 km
+33474	Українські ПВП вильоти  (ДЕТАЛІ - БІО)	Mobile Depot	4 834 km
+33474	Українські ПВП вильоти  (ДЕТАЛІ - БІО)	Mobile Depot	176 km
+33474	Українські ПВП вильоти  (ДЕТАЛІ - БІО)	Mobile Depot	3 362 km
+33474	Українські ПВП вильоти  (ДЕТАЛІ - БІО)	Mobile Depot	3 385 km
+33474	Українські ФК запрошують! Деталі в БІО.	Mobile Depot	233 km
+33474	Українські ФК запрошують! Деталі в БІО.	Mobile Depot	3 254 km
+20183	☼ Slowmoover	Providence	-
+621	ヒューベリオン	Caracal	-
+33474	华人00联盟主权团冬季大招新！加QQ群：46372079 送巨舰大炮！送起步大礼包！午夜激情大乱斗！安静祥和生产赚钱！	Mobile Depot	3 324 km
+33474	华人00联盟主权团冬季大招新！加QQ群：46372079 送巨舰大炮！送起步大礼包！午夜激情大乱斗！安静祥和生产赚钱！	Mobile Depot	228 km
+33474	华人00联盟主权团冬季大招新！加QQ群：46372079 送巨舰大炮！送起步大礼包！午夜激情大乱斗！安静祥和生产赚钱！	Mobile Depot	3 304 km
