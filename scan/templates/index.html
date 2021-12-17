@@ -2,14 +2,21 @@
 
 
 {% block content %}
+
 <style>
 .form-control{margin-bottom:13px}
 </style>
-<div class="container">
- <div class="row">
- <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4 well well-sm">
 
-     <form action="" method="post" novalidate>
+
+
+
+    <div class="container">
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
 
@@ -20,9 +27,16 @@
 
         <p>{{ form.submit(class="btn btn-outline-success my-2 my-sm-0") }}</p>
     </form>
- </div>
- </div>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
 </div>
+
+
+
+
 
 {% endblock %}
 
