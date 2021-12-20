@@ -32,6 +32,7 @@ def index():  # put application's code here
         else:
             data, raw_data, total_query = check_chars_from_local(form.text.data)
             if not data or 'error' in data:
+                print(data)
                 return render_template('error.html', title='Error Page')
 
             ch_aff = aff_new(raw_data)
