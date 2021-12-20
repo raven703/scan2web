@@ -1,5 +1,5 @@
 import time
-from flask import render_template
+from flask import render_template, redirect, url_for
 from app import app, db
 
 from scan.forms import ScanForm
@@ -50,11 +50,14 @@ def index():  # put application's code here
     return render_template('index.html', title='Scan Page', form=form)
 
 
-@app.route('/<url>', methods=['GET'])
+@app.route('/<url>', methods=['GET', 'POST'])
 def scan_url(url):
     start_time = time.time()
 
     dbScanResult = ShipDB.query.filter(ShipDB.url == url).first()
+    if dbScanResult is None:
+        return redirect(url_for('index'))
+
     ships_common = json.loads(dbScanResult.data)
     ships_total = dict(sorted(ships_common['ships_total'].items(), key=lambda x: x[1], reverse=True))
     types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
