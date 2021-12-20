@@ -13,6 +13,7 @@ class UserDB(db.Model):
     c_ticker = db.Column(db.String(64), index=True, unique=False)
     c_id = db.Column(db.String(64), index=True, unique=False)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    url = db.Column(db.String(64), index=True, unique=False)
 
 class ShipDB(db.Model):
     id = db.Column(db.Integer, primary_key=True)

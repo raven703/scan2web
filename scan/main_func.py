@@ -197,7 +197,7 @@ def aff_new(charid: list):
 
 
 def count_ally(char_affil: list):
-    common = {'alliance': {}, 'corporation': {}, 'total': {}, 'total_corps': {}, 'total_chars': {}}  # dict for counting numbers
+    common = {'alliance': {}, 'corporation': {}, 'total': {}, 'total_corps': {}, 'total_chars': {}, 'url': {}}  # dict for counting numbers
     with open("alliance_data.json", "r") as f:
         ally_data = json.load(f)  # dict for all alliances {'UID':name}
     with open("corp_data.json", "r") as f:
@@ -245,6 +245,12 @@ def count_ally(char_affil: list):
         json.dump(ally_data, f)
     with open("corp_data.json", "w") as f:
         json.dump(corp_data, f)
+
+    url = uuid.uuid4().hex
+    u = ShipDB(data=json.dumps(common), url=url)
+    db.session.add(u)
+    db.session.commit()
+    common['url'] = url
 
     return common
 
