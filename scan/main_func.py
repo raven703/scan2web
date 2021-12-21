@@ -247,10 +247,11 @@ def count_ally(char_affil: list):
         json.dump(corp_data, f)
 
     url = uuid.uuid4().hex
+    common['url'] = url
     u = ShipDB(data=json.dumps(common), url=url)
     db.session.add(u)
     db.session.commit()
-    common['url'] = url
+
 
     return common
 
@@ -270,9 +271,10 @@ def count_ships(result: list) -> dict:
                 ships_common['types_total'][key] += 1
                 break
     url = uuid.uuid4().hex
+    ships_common['url'] = url
     u = ShipDB(data=json.dumps(ships_common), url=url)
     db.session.add(u)
     db.session.commit()
-    ships_common['url'] = url
+
 
     return ships_common
