@@ -40,7 +40,7 @@ def index():
                 return redirect(url_for('index'))
 
             ch_aff = aff_new(raw_data)
-            common = count_ally(ch_aff)
+            common, common2 = count_ally(ch_aff)
             # total_alliance = dict(sorted(common["alliance"].items(), key=lambda x: x[1], reverse=True))
             # total_corp = dict(sorted(common["corporation"].items(), key=lambda x: x[1], reverse=True))
             # total_count = common["total"]
@@ -51,6 +51,7 @@ def index():
             #                        total_alliance=total_alliance, total_corp=total_corp, total_query=total_query,
             #                        total_count=total_count, total_corps=total_corps, total_chars=len(raw_data), exec_time=exec_time, url=url)
             url = common['url']
+            # print(common2)
             return redirect(f'/{url}')
 
     return render_template('index.html', title='Scan Page', form=form)

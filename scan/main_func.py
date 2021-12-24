@@ -1,5 +1,6 @@
 from esipy import EsiApp
 from esipy import EsiClient
+import re
 import requests
 import json
 import datetime
@@ -69,6 +70,7 @@ def convert_to_tranq_post(data: list) -> str:  # convert to Tranq POST string fo
     result = f"{result.strip(',')} ]"
     return result
 
+
 def db_check_user(user):
     year = user.timestamp.year
     month = user.timestamp.month
@@ -87,12 +89,13 @@ def db_check_user(user):
 
     return
 
+
 def check_chars_from_local(data: str) -> str:
     # this func gets characters from local scan, check them in DB and if not: ask TRANQ for info and put into DB
     # return 2 style data: raw as list and formatted as TRANQ post request
 
     raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
-    if re.search(r'[^a-zA-Z0-9 \'\`]', ''.join(raw_data)):
+    if re.search(r'[^a-zA-Z0-9 \'\-`]', ''.join(raw_data)):
         print('error in reCCC')
         return 'error in re', 'error', 'error'
 
@@ -112,14 +115,15 @@ def check_chars_from_local(data: str) -> str:
 
     if len(request_list) > 0:
         data_id = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
-                      data=convert_to_tranq_post(request_list)).json()
-           # get chars ID from server
+                                data=convert_to_tranq_post(request_list)).json()
+        # get chars ID from server
         if 'characters' in data_id:
             for slovar in data_id['characters']:
-                cid_list.append(slovar['id']) # list for chars ID
+                cid_list.append(slovar['id'])  # list for chars ID
                 char_info = get_char_info(slovar['id'])
                 if 'alliance_id' in list(char_info):
-                    u = UserDB(uid=slovar['id'], name=slovar['name'], a_id=char_info.alliance_id, c_id = char_info.corporation_id)
+                    u = UserDB(uid=slovar['id'], name=slovar['name'], a_id=char_info.alliance_id,
+                               c_id=char_info.corporation_id)
                 else:
                     u = UserDB(uid=slovar['id'], name=slovar['name'], c_id=char_info.corporation_id)
 
@@ -127,10 +131,6 @@ def check_chars_from_local(data: str) -> str:
                 db.session.commit()
 
     return convert_to_tranq_post(cid_list), cid_list, total_query
-
-
-
-
 
 
 def get_chars_from_local(data: str):  # возвращает ID перс. из локала, преобразует их в формат ПОСТ запроса
@@ -150,13 +150,12 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
             exist_data.append(name)
             print(user.name, user.uid)
 
-
     data = convert_to_tranq_post(request_data)  # преобразование в формат пост запроса сервера. передаётся список
     # неизвестных имён
     # запрос у сервера, передаётся список имён, в ответ UID
     if len(request_data) > 0:
         uid_data_req = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
-                         data=data).json()
+                                     data=data).json()
         print(f'total requests from server {len(uid_data_req)}')
     else:
         uid_data_req = []
@@ -173,8 +172,6 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
         for name in exist_data:
             user = UserDB.query.filter(UserDB.name == name).first()
             cid_list.append(user.uid)
-
-
 
     if len(cid_list) > 0:
         return convert_to_tranq_post(cid_list)
@@ -195,9 +192,10 @@ def aff_new(charid: list):
     return aff_list
 
 
-
 def count_ally(char_affil: list):
-    common = {'alliance': {}, 'corporation': {}, 'total': {}, 'total_corps': {}, 'total_chars': {}, 'url': {}}  # dict for counting numbers
+    common = {'alliance': {}, 'corporation': {}, 'total': {}, 'total_corps': {}, 'total_chars': {},
+              'url': {}}  # dict for counting numbers
+    common2 = {'alliances': {}}
     with open("alliance_data.json", "r") as f:
         ally_data = json.load(f)  # dict for all alliances {'UID':name}
     with open("corp_data.json", "r") as f:
@@ -206,15 +204,27 @@ def count_ally(char_affil: list):
         return char_affil
 
     for dicts in char_affil:
+
         ally_flag = False
         for k, v in dicts.items():  # k, for key ally or corp and v for UID value of both
             if k == 'alliance_id':
                 ally_info = get_alliance_info(v) if str(v) not in ally_data else None
+
+                uid = v
                 v = ally_data.setdefault(str(v),
                                          f'{ally_info.name} [{ally_info.ticker}]' if str(v) not in ally_data else None)
                 # check for UID in global dict, return if TRUE, add if False
+
+                name, ticker = find_ticker(v)
+
                 common['alliance'].setdefault(v, 0)  # count entries, total {UID: count} ex. {99007629: 2}
                 common['alliance'][v] += 1  # count entries
+
+
+                common2['alliances'].setdefault(uid, {'Name': name.strip(), 'Ticker': ticker, 'count': 0})
+                common2['alliances'][uid]['count'] += 1
+                print(common2)
+
                 ally_flag = True
 
             elif k == 'corporation_id' and ally_flag:
@@ -224,11 +234,12 @@ def count_ally(char_affil: list):
                 common['corporation'].setdefault(v, 0)
                 common['corporation'][v] += 1
             elif k == 'corporation_id':
-                # corp_info = get_corporation_info(v) if str(v) not in corp_data else None
+
                 common['alliance'].setdefault('No alliance', 0)
                 common['alliance']['No alliance'] += 1
                 v = corp_data.setdefault(str(v),
-                                         f'{get_corporation_info(v).name}  [{get_corporation_info(v).ticker}]' if str(v) not in corp_data else None)
+                                         f'{get_corporation_info(v).name}  [{get_corporation_info(v).ticker}]' if str(
+                                             v) not in corp_data else None)
                 common['corporation'].setdefault(v, 0)
                 common['corporation'][v] += 1
 
@@ -252,8 +263,7 @@ def count_ally(char_affil: list):
     db.session.add(u)
     db.session.commit()
 
-
-    return common
+    return common, common2
 
 
 def count_ships(result: list) -> dict:
@@ -276,5 +286,12 @@ def count_ships(result: list) -> dict:
     db.session.add(u)
     db.session.commit()
 
-
     return ships_common
+
+
+def find_ticker(string):
+    ticker = re.findall(r'([[a-zA-Z\d_.]+])', string)
+    name = re.sub(r'\[.+\]', '', string)
+    if len(ticker) == 0:
+        ticker = '[NOTICKER]'
+    return name, "".join(ticker)

@@ -2,7 +2,10 @@
 
 {% block content %}
 
-    <a href="/{{ url }}">dscan.stainhub.ru/{{ url }}</a>
+   <div>
+    <a href="{{ url }}" class="text-danger" >dscan.stainhub.ru{{ url }}</a>
+     <button type="button" class="copyToClipBoardBtn btn btn-secondary btn2 half-stroke left">Copy URL</button>
+    </div>
 
     <h1>Total object in dscan :</h1>
 
