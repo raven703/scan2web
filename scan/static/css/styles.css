@@ -1,6 +1,13 @@
 /* transition conf */
 /* colors */
 /* btn conf */
+
+.liteback {
+	background-color: chocolate
+}
+
+
+
 * {
   box-sizing: border-box;
   font-family: sans-serif;

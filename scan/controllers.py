@@ -40,7 +40,7 @@ def index():
                 return redirect(url_for('index'))
 
             ch_aff = aff_new(raw_data)
-            common, common2 = count_ally(ch_aff)
+            common = count_ally(ch_aff)
             # total_alliance = dict(sorted(common["alliance"].items(), key=lambda x: x[1], reverse=True))
             # total_corp = dict(sorted(common["corporation"].items(), key=lambda x: x[1], reverse=True))
             # total_count = common["total"]
@@ -51,8 +51,8 @@ def index():
             #                        total_alliance=total_alliance, total_corp=total_corp, total_query=total_query,
             #                        total_count=total_count, total_corps=total_corps, total_chars=len(raw_data), exec_time=exec_time, url=url)
 
-            url = common2['url']
-            print(common2)
+            url = common['url']
+            print('output from scanform', common)
             return redirect(f'/{url}')
 
     return render_template('index.html', title='Scan Page', form=form)
@@ -67,7 +67,7 @@ def scan_url(url):
         return redirect(url_for('index'))
 
     data = json.loads(dbScanResult.data)
-    if 'corporation' not in data:
+    if 'corporations' not in data:
         ships_common = data
         ships_total = dict(sorted(ships_common['ships_total'].items(), key=lambda x: x[1], reverse=True))
         types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
@@ -76,14 +76,13 @@ def scan_url(url):
         return render_template('ships_url.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total, url=url_name)
     else:
 
-        common = data
-        total_alliance = dict(sorted(common["alliances"].keys().items(), key=lambda x: x[1], reverse=True))
-        total_corp = dict(sorted(common["corporation"].items(), key=lambda x: x[1], reverse=True))
-        total_count = common["total"]
-        total_corps = common["total_corps"]
-        total_chars = common["total_chars"]
-        total_query = common["total"]
-        url_name = f"/{common['url']}"
+        total_alliance = dict(sorted(data['alliances'].items(), key=lambda x: x[1].get('count'), reverse=True))
+        total_corp = dict(sorted(data['corporations'].items(), key=lambda x: x[1].get('count'), reverse=True))
+        total_count = data["total"]
+        total_corps = data["total_corps"]
+        total_chars = data["total_chars"]
+        total_query = data["total"]
+        url_name = f"/{data['url']}"
 
         exec_time = round(time.time() - start_time, 3)
         return render_template('scanDb.html', title='Scan result page',
