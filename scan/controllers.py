@@ -1,10 +1,11 @@
 import time
+
 from flask import render_template, redirect, url_for
 from app import app
 
 from scan.forms import ScanForm
 from scan.main_func import *
-
+from datetime import datetime
 
 
 db.create_all()
@@ -78,16 +79,22 @@ def scan_url(url):
 
         total_alliance = dict(sorted(data['alliances'].items(), key=lambda x: x[1].get('count'), reverse=True))
         total_corp = dict(sorted(data['corporations'].items(), key=lambda x: x[1].get('count'), reverse=True))
-        total_count = data["total"]
+        total_count = data["total"] # total alliances
         total_corps = data["total_corps"]
         total_chars = data["total_chars"]
         total_query = data["total"]
         url_name = f"/{data['url']}"
+        dt = datetime.utcnow()
+        ct = dt.strftime("%H:%M ET")
+        cd = f'{dt.day}.{dt.month}.{dt.year}'
+
+
+            # f'{dt.day}.{dt.month}.{dt.year} {ct}'
 
         exec_time = round(time.time() - start_time, 3)
         return render_template('scanDb.html', title='Scan result page',
                                total_alliance=total_alliance, total_corp=total_corp, total_query=total_query,
                                total_count=total_count, total_corps=total_corps, total_chars=total_chars,
-                               exec_time=exec_time, url=url_name)
+                               exec_time=exec_time, url=url_name, current_date=cd, current_time = ct)
 
 
