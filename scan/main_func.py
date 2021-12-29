@@ -95,7 +95,7 @@ def check_chars_from_local(data: str) -> str:
     # return 2 style data: raw as list and formatted as TRANQ post request
 
     raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
-    if re.search(r'[^a-zA-Z0-9 \'\-`]', ''.join(raw_data)):
+    if re.search(r'[^a-zA-Z0-9 \'\-`!]', ''.join(raw_data)):
         print('error in reCCC')
         return 'error in re', 'error', 'error'
 
@@ -315,7 +315,7 @@ def count_ships(result: list) -> dict:
 
 
 def find_ticker(string):
-    ticker = re.findall(r'([[a-zA-Z\d_.]+])', string)
+    ticker = re.findall(r'([[a-zA-Z\d_.<>]+])', string)
     name = re.sub(r'\[.+\]', '', string)
     if len(ticker) == 0:
         ticker = '[NOTICKER]'

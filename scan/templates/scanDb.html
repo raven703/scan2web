@@ -2,16 +2,16 @@
 
 {% block content %}
 
-
-{#    <a href="{{ url }}" class="text-danger" >dscan.stainhub.ru{{ url }}</a>#}
     <div class="row">
     <div class="col-md-6">
         <h3>  In local: {{ total_count }}
-     <button type="button" class="copyToClipBoardBtn btn btn-secondary btn2 half-stroke left">Copy Link</button></h3>
+     <button type="button" class="rounded-pill btn btn-primary">Copy Link</button></h3>
     </div>
     <div class="col-md-6">
 
-      <h3> Date: {{ current_date }} Time: {{ current_time }}</h3>
+        <h2> Date: {{ scan_date }}</h2>
+        <h2> Time: {{ scan_time}}</h2>
+        <h2> Time ago: {{ time_delta }}</h2>
     </div>
     </div>
 
@@ -20,27 +20,27 @@
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-6">
-					<h3>
+                    <div class=""> <h3> Alliances: {{ total_count }} </h3></div>
 
-                        <p> Alliances: {{ total_count }}</p>
-					</h3>
-
-                    <ul id="alliances">
+                    <ul  id="alliances">
                     {% for key, value in total_alliance.items()  %}
                         <li data-alliance="{{ key }}">
                         <div class = "row">
                             <div class = "col-md-2">
-                            <img src="https://images.evetech.net/alliances/{{ key }}/logo?size=64" style="height: 64px; width: 64px;" class="" alt="{{ value["Name"] }}">
+                            <img src="https://images.evetech.net/alliances/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">
                             </div>
 
                             <div class="col-md-7">
 
-                                <a href="https://zkillboard.com/alliance/{{ key }}"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>
+                                <a href="https://zkillboard.com/alliance/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>
                             </div>
                         <div class="col-md-3">
+                    <div class=" mark-large">
+
+                           {{ value["count"] }}
+                    </div>
 
 
-                        {{ value["count"] }}
                         </div>
                        </div>
 
@@ -52,25 +52,28 @@
 
 				</div>
 				<div class="col-md-6">
-					<h3>
+				  <div class="">	<h3>
 						Corporations: {{ total_corps }}
 					</h3>
+                  </div>
                           <ul id="corps">
                     {% for key, value in total_corp.items()  %}
                         <li data-alliance="{{value["ally_uid"] }}">
                         <div class = "row">
                             <div class = "col-md-2">
-                            <img src="https://images.evetech.net/corporations/{{ key }}/logo?size=64" style="height: 64px; width: 64px;" class="" alt="{{ value["Name"] }}">
+                            <img src="https://images.evetech.net/corporations/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">
                             </div>
 
                             <div class="col-md-7">
 
-                                <a href="https://zkillboard.com/corporation/{{ key }}"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>
+                                <a href="https://zkillboard.com/corporation/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>
                             </div>
-                        <div class="col-md-3">
-
-
+                        <div class="col-md-3 ">
+                            <div class="mark-large">
                         {{ value["count"] }}
+                            </div>
+
+
                         </div>
                        </div>
 
@@ -84,14 +87,20 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-			<h3>
-				Info:
-			</h3>
-            	<ul>
+			<div class="card bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header"> <h3>Info:</h3></div>
+  <div class="card-body">
+
+    <p class="card-text"><ul>
                     <li>Queries:{{ total_query }}</li>
-                    <li>Time:{{ exec_time }}s</li>
+                    <li>Time :{{ current_time }}</li>
+                    <li>Date : {{ current_date }}</li>
 
                 </ul>
+      </p>
+  </div>
+</div>
+
 		</div>
 	</div>
 

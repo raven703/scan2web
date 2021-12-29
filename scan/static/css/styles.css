@@ -1,38 +1,95 @@
-/* transition conf */
-/* colors */
-/* btn conf */
+.card-body{
+  background-color: darkcyan;
+}
+.btn-primary {
+  background-color: darkcyan;
+}
 
-.liteback {
-	background-color: chocolate
+.card-header{
+  background-color: #ABB6C2;
+}
+
+.mark-large {
+	font-size: 40px;
+	margin-top: 14px;
+	background-color: #3a87ad;
+	border-radius: 2px;
+	min-width: 35px;
+	display: inline-block;
+	padding: 2px 0px;
+	font-weight: bold;
+	color: #ffffff;
+	line-height: 1;
+	text-align: center;
+}
+
+.mark-column {
+  background-color: #ABB6C2;
+  display: inline-block;
+  vertical-align: middle;
+  border-top-width: 0;
+  border-top-style: solid;
+  margin-top: 0;
+  padding: 2px 15px 0;
 }
 
 
 
-* {
-  box-sizing: border-box;
-  font-family: sans-serif;
+
+.list-group-item {
+	position: relative;
+	display: block;
+	padding: unset;
+	/* color: #fff; */
+	text-decoration: none;
+	background-color: transparent;
+	border: 1px solid transparent;
+}
+
+.list-group-item-action:hover {
+ z-index:1;
+ color:#fff;
+ text-decoration:underline;
+ background-color:transparent
+}
+
+.li-center{
+
+}
+
+.bold_link{
+  font-weight: bold;
+  font-size:1.3em;
+}
+
+.img_border {
+  margin: 5px;
+  height: 64px;
+  width: 64px;
+  border-radius: 10px;
+
+}
+
+
+li {
+  list-style-type: none;
+}
+
+
+
+.liteback {
+  background-color: #499ab2 ;
+  border-radius: 5px;
 }
 
 body {
-  background: #fcfcfc;
+	background-image: None;
+
 }
 
 #btn-grp {
   max-width: 768px;
   margin: auto;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #7f8c8d;
-}
-
-p {
-  color: #7f8c8d;
 }
 
 .col-half {
@@ -43,31 +100,18 @@ p {
 }
 
 .btn2 {
-  /*margin: 25px auto;*/
   position: relative;
-  /*font-size: 25px;*/
   color: #fff;
-  /*padding: 20px;*/
-  /*width: 200px;*/
   overflow: hidden;
   text-align: center;
   cursor: pointer;
-
   color:#6c757d;
   border-color:#6c757d
 }
 .btn2:nth-of-type(1) {
   background-color: lightskyblue;
 }
-/*.btn2:nth-of-type(2) {*/
-/*  background-color: #3498db;*/
-/*}*/
-/*.btn2:nth-of-type(3) {*/
-/*  background-color: #e74c3c;*/
-/*}*/
-/*.btn2:nth-of-type(4) {*/
-/*  background-color: #1abc9c;*/
-/*}*/
+
 .btn2.left:after {
   left: 0;
 }
