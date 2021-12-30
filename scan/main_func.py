@@ -120,7 +120,6 @@ def check_chars_from_local(data: str) -> str:
         if 'characters' in data_id:
             for slovar in data_id['characters']:
                 char_info = get_char_info(slovar['id'])
-
                 if "error" not in char_info:
                     cid_list.append(slovar['id'])  # list for chars ID
 
@@ -130,7 +129,7 @@ def check_chars_from_local(data: str) -> str:
                     db.session.add(u)
                     db.session.commit()
                 elif "corporation_id" in list(char_info):
-                    print(char_info)
+
                     u = UserDB(uid=slovar['id'], name=slovar['name'], c_id=char_info.corporation_id)
                     db.session.add(u)
                     db.session.commit()
