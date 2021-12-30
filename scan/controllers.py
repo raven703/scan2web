@@ -38,7 +38,6 @@ def index():
             ch_aff = aff_new(raw_data)
             common = count_ally(ch_aff)
             url = common['url']
-            print('output from scanform', common)
             return redirect(f'/{url}')
 
     return render_template('index.html', title='Scan Page', form=form)
@@ -49,7 +48,6 @@ def scan_url(url):
     start_time = time.time()
 
     dbScanResult = ShipDB.query.filter(ShipDB.url == url).first()
-    print(dbScanResult)
     if dbScanResult is None:
         return redirect(url_for('index'))
 
@@ -58,7 +56,7 @@ def scan_url(url):
     dt_now = datetime.utcnow()
     scan_time = timestamp.strftime("%H:%M ET")
     scan_date = timestamp.strftime("%d.%m.%Y")
-    time_delta = dt_now - timestamp
+    time_delta = str(dt_now - timestamp)[:-7]
     current_time = dt_now.strftime("%H:%M ET")
     current_date = dt_now.strftime("%d.%m.%Y")
 
@@ -68,7 +66,7 @@ def scan_url(url):
         types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
         url_name = f"/{ships_common['url']}"
         exec_time = round(time.time() - start_time, 3)
-        return render_template('ships_url.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total, url=url_name)
+        return render_template('shipDb.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total, url=url_name)
     else:
 
         total_alliance = dict(sorted(data['alliances'].items(), key=lambda x: x[1].get('count'), reverse=True))

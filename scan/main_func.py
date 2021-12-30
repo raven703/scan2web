@@ -193,8 +193,7 @@ def aff_new(charid: list):
 
 
 def count_ally(char_affil: list):
-    common = {'alliance': {}, 'corporation': {}, 'total': {}, 'total_corps': {}, 'total_chars': {},
-              'url': {}}  # dict for counting numbers
+    # dict for counting numbers
     common2 = {'alliances': {}, 'corporations': {}}
     with open("alliance_data.json", "r") as f:
         ally_data = json.load(f)  # dict for all alliances {'UID':name}
@@ -216,9 +215,6 @@ def count_ally(char_affil: list):
                 # check for UID in global dict, return if TRUE, add if False
 
                 name, ticker = find_ticker(v)
-
-                # common['alliance'].setdefault(v, 0)  # count entries, total {UID: count} ex. {99007629: 2}
-                # common['alliance'][v] += 1  # count entries
                 common2['alliances'].setdefault(uid, {'Name': name.strip(), 'Ticker': ticker, 'count': 0})
                 common2['alliances'][uid]['count'] += 1
 
@@ -233,10 +229,6 @@ def count_ally(char_affil: list):
                                          f'{corp_info.name}  [{corp_info.ticker}]' if str(v) not in corp_data else None)
                 name, ticker = find_ticker(v)
 
-
-                # common['corporation'].setdefault(v, 0)
-                # common['corporation'][v] += 1
-
                 common2['corporations'].setdefault(uid, {'Name': name.strip(), 'Ticker': ticker, 'count': 0, 'ally_uid': ally_uid})
                 common2['corporations'][uid]['count'] += 1
 
@@ -244,8 +236,6 @@ def count_ally(char_affil: list):
             elif k == 'corporation_id':
 
                 uid = 000
-                # common['alliance'].setdefault('No alliance', 0)
-                # common['alliance']['No alliance'] += 1
                 common2['alliances'].setdefault(uid, {'Name': 'No alliance', 'Ticker': 'NoA', 'count': 0})
                 common2['alliances'][uid]['count'] += 1
 
@@ -253,9 +243,6 @@ def count_ally(char_affil: list):
                 v = corp_data.setdefault(str(v),
                                          f'{get_corporation_info(v).name}  [{get_corporation_info(v).ticker}]' if str(
                                              v) not in corp_data else None)
-                # common['corporation'].setdefault(v, 0)
-                # common['corporation'][v] += 1
-
                 name, ticker = find_ticker(v)
 
 
@@ -267,9 +254,6 @@ def count_ally(char_affil: list):
     # res = len(common['alliance'])
     # if 'No alliance' in common['alliance']:
     #     res -= 1
-    # common['total'] = res
-    # common['total_corps'] = len(common['corporation'])
-    # common['total_chars'] = len(char_affil)
 
     common2['total'] = len(common2['alliances'])
     common2['total_corps'] = len(common2['corporations'])
@@ -282,7 +266,6 @@ def count_ally(char_affil: list):
         json.dump(corp_data, f)
 
     url = uuid.uuid4().hex
-    # common['url'] = url
     common2['url'] = url
     u = ShipDB(data=json.dumps(common2), url=url)
     db.session.add(u)
@@ -315,7 +298,7 @@ def count_ships(result: list) -> dict:
 
 
 def find_ticker(string):
-    ticker = re.findall(r'([[a-zA-Z\d_.<>]+])', string)
+    ticker = re.findall(r'([[a-zA-Z\d_.<>-]+])', string)
     name = re.sub(r'\[.+\]', '', string)
     if len(ticker) == 0:
         ticker = '[NOTICKER]'

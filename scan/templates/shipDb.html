@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-    <div class="row">
+
+  <div class="row">
     <div class="col-md-6">
-        <h3>  In local: {{ total_chars }}
+        <h3>  In local: {{ total_count }}
      <button type="button" id="btnCopy" class="btn btn-primary">Copy Link</button></h3>
     </div>
     <div class="col-md-6">
@@ -15,29 +15,30 @@
     </div>
     </div>
 
-
-    <div class="row">
+ <div class="row">
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-6">
-                    <div class=""> <h3> Alliances: {{ total_count }} </h3></div>
+                    <div class=""> <h3> Object on scan:  </h3></div>
 
-                    <ul  id="alliances">
-                    {% for key, value in total_alliance.items()  %}
-                        <li class="margins" data-alliance="{{ key }}">
+      <ul  id="ships">
+                    {% for key, value in ships_total.items()  %}
+                        <li class="margins" data-ship="111">
                         <div class = "row">
                             <div class = "col-md-2">
-                            <img src="https://images.evetech.net/alliances/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">
+
+{#                            <img src="https://images.evetech.net/alliances/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">#}
+{#                                https://images.evetech.net/types/17186/render?size=64#}
                             </div>
 
                             <div class="col-md-7">
-
-                                <a href="https://zkillboard.com/alliance/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>
+                            {{ key }}
+{#                                <a href="https://zkillboard.com/alliance/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>#}
                             </div>
                         <div class="col-md-3">
                     <div class=" mark-large">
 
-                           {{ value["count"] }}
+                           {{ value }}
                     </div>
 
 
@@ -53,24 +54,25 @@
 				</div>
 				<div class="col-md-6">
 				  <div class="">	<h3>
-						Corporations: {{ total_corps }}
+						Ship types:
 					</h3>
                   </div>
-                          <ul id="corps">
-                    {% for key, value in total_corp.items()  %}
-                        <li class="margins" data-alliance="{{value["ally_uid"] }}">
+                          <ul id="types">
+                    {% for key, value in types_total.items()  %}
+                        <li data-alliance="111">
                         <div class = "row">
-                            <div class = "col-md-2">
-                            <img src="https://images.evetech.net/corporations/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">
+                             <div class = "col-md-2">
+                                 {{ key }}
+{#                            <img src="https://images.evetech.net/corporations/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">#}
                             </div>
 
                             <div class="col-md-7">
 
-                                <a href="https://zkillboard.com/corporation/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>
+{#                                <a href="https://zkillboard.com/corporation/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>#}
                             </div>
-                        <div class="col-md-3 ">
+                        <div class="col-md-3">
                             <div class="mark-large">
-                        {{ value["count"] }}
+                        {{ value }}
                             </div>
 
 

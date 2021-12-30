@@ -1,3 +1,22 @@
+.btn-primary {
+  border-radius: 5px;
+}
+
+.margins {
+  margin-bottom: 5px;
+}
+.card {
+  background-color: #0F2537;
+}
+.card-header {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.card-header:first-child {
+    border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .card-body{
   background-color: darkcyan;
 }
