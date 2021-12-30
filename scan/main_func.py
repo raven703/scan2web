@@ -120,6 +120,7 @@ def check_chars_from_local(data: str) -> str:
         if 'characters' in data_id:
             for slovar in data_id['characters']:
                 char_info = get_char_info(slovar['id'])
+
                 if "error" not in char_info:
                     cid_list.append(slovar['id'])  # list for chars ID
 
@@ -129,7 +130,7 @@ def check_chars_from_local(data: str) -> str:
                     db.session.add(u)
                     db.session.commit()
                 elif "corporation_id" in list(char_info):
-
+                    print(char_info)
                     u = UserDB(uid=slovar['id'], name=slovar['name'], c_id=char_info.corporation_id)
                     db.session.add(u)
                     db.session.commit()
@@ -239,19 +240,16 @@ def count_ally(char_affil: list):
 
             elif k == 'corporation_id':
 
-                uid = 000
-                common2['alliances'].setdefault(uid, {'Name': 'No alliance', 'Ticker': 'NoA', 'count': 0})
-                common2['alliances'][uid]['count'] += 1
 
-
+                uid = v
+                noa = 000000
+                common2['alliances'].setdefault(noa, {'Name': 'No alliance', 'Ticker': 'NoA', 'count': 0})
+                common2['alliances'][noa]['count'] += 1
                 v = corp_data.setdefault(str(v),
                                          f'{get_corporation_info(v).name}  [{get_corporation_info(v).ticker}]' if str(
                                              v) not in corp_data else None)
                 name, ticker = find_ticker(v)
-
-
-
-                common2['corporations'].setdefault(uid, {'Name': name.strip(), 'Ticker': ticker, 'count': 0})
+                common2['corporations'].setdefault(uid, {'Name': name.strip(), 'Ticker': ticker, 'count': 0, 'ally_uid': noa})
                 common2['corporations'][uid]['count'] += 1
 
 
