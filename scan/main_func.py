@@ -89,6 +89,10 @@ def db_check_user(user):
 
     return
 
+def chunc(lst, n):
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
 
 def check_chars_from_local(data: str) -> str:
     # this func gets characters from local scan, check them in DB and if not: ask TRANQ for info and put into DB
@@ -112,28 +116,29 @@ def check_chars_from_local(data: str) -> str:
     total_query['TRANQ_Server'] = len(request_list)
     total_query['Database'] = len(cid_list)
 
+
     if len(request_list) > 0:
-        data_id = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
-                                data=convert_to_tranq_post(request_list)).json()
-        # get chars ID from server
-
-        if 'characters' in data_id:
-            for slovar in data_id['characters']:
-                char_info = get_char_info(slovar['id'])
-
-                if "error" not in char_info:
-                    cid_list.append(slovar['id'])  # list for chars ID
-
-                if 'alliance_id' in list(char_info):
-                    u = UserDB(uid=slovar['id'], name=slovar['name'], a_id=char_info.alliance_id,
+        request_list = list(chunc(request_list, 50))
+        for req_list in request_list:
+            print("REQ list", req_list)
+            data_id = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
+                                data=convert_to_tranq_post(req_list)).json()
+            # get chars ID from server
+            if 'characters' in data_id:
+                for slovar in data_id['characters']:
+                    char_info = get_char_info(slovar['id'])
+                    if "error" not in char_info:
+                        cid_list.append(slovar['id'])  # list for chars ID
+                    if 'alliance_id' in list(char_info):
+                        u = UserDB(uid=slovar['id'], name=slovar['name'], a_id=char_info.alliance_id,
                                c_id=char_info.corporation_id)
-                    db.session.add(u)
-                    db.session.commit()
-                elif "corporation_id" in list(char_info):
-                    print(char_info)
-                    u = UserDB(uid=slovar['id'], name=slovar['name'], c_id=char_info.corporation_id)
-                    db.session.add(u)
-                    db.session.commit()
+                        db.session.add(u)
+                        db.session.commit()
+                    elif "corporation_id" in list(char_info):
+                        print(char_info)
+                        u = UserDB(uid=slovar['id'], name=slovar['name'], c_id=char_info.corporation_id)
+                        db.session.add(u)
+                        db.session.commit()
 
     return convert_to_tranq_post(cid_list), cid_list, total_query
 
