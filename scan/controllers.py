@@ -80,7 +80,7 @@ def scan_url(url):
         dt = datetime.utcnow()
 
         exec_time = round(time.time() - start_time, 3)
-        return render_template('scanDb.html', title='Scan result page',
+        return render_template('scanDb.html', title=f"{total_chars} pilots in local",
                                total_alliance=total_alliance, total_corp=total_corp, total_query=total_query,
                                total_count=total_count, total_corps=total_corps, total_chars=total_chars,
                                exec_time=exec_time, url=url_name, current_date=current_date, current_time = current_time, scan_time = scan_time,
