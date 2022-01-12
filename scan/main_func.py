@@ -94,7 +94,7 @@ def chunc(lst, n):
         yield lst[i:i + n]
 
 
-def check_chars_from_local(data: str) -> str:
+def check_chars_from_local(data: str):
     # this func gets characters from local scan, check them in DB and if not: ask TRANQ for info and put into DB
     # return 2 style data: raw as list and formatted as TRANQ post request
 
@@ -118,9 +118,10 @@ def check_chars_from_local(data: str) -> str:
 
 
     if len(request_list) > 0:
+
         request_list = list(chunc(request_list, 50))
         for req_list in request_list:
-            print("REQ list", req_list)
+            # print("REQ list", req_list)
             data_id = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
                                 data=convert_to_tranq_post(req_list)).json()
             # get chars ID from server

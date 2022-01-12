@@ -29,7 +29,7 @@ def index():
             # exec_time = round(time.time() - start_time, 3)
             return redirect(f'/{url}')
 
-            # return render_template('ships.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total, url=url)
+
         else:
             data, raw_data, total_query = check_chars_from_local(form.text.data)
             if not data or 'error' in data:

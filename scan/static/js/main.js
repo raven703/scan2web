@@ -1,7 +1,6 @@
 
 $(document).ready(function(){
 
-
   $("#alliances").children("li").each(function(){
         $(this).mouseover(function() {
             $(this).addClass("liteback");
@@ -31,12 +30,6 @@ $(document).ready(function(){
             });
         });
     });
-
-
-
-
-
-
 
 });
 
