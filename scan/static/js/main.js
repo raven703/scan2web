@@ -1,5 +1,30 @@
-
 $(document).ready(function(){
+
+
+    $("#objects").children("li").each(function(){
+        $(this).mouseover(function() {
+            $(this).addClass("liteback");
+        });
+        $(this).mouseout(function () {
+            $(this).removeClass("liteback");
+        });
+    });
+
+
+    $("#types").children("li").each(function(){
+        $(this).mouseover(function() {
+            $(this).addClass("liteback");
+        });
+        $(this).mouseout(function () {
+            $(this).removeClass("liteback");
+        });
+    });
+
+
+
+
+
+
 
   $("#alliances").children("li").each(function(){
         $(this).mouseover(function() {

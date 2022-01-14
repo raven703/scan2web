@@ -15,10 +15,8 @@ db.create_all()
 @app.route('/progress')
 def progress():
     def generate():
+        yield 'data: ' + '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}' + '}\n\n'
 
-        while True:
-            yield 'data: ' + '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}' + '}\n\n'
-            time.sleep(.3)
     return Response(generate(), mimetype='text/event-stream')
 
 
@@ -30,17 +28,14 @@ def index2():
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     r.mset({'max': 0})
-
+    r.mset({'current': 0})
     form = ScanForm()
     if form.validate_on_submit():
-        #start_time = time.time()
 
         if chr(9) in form.text.data:
 
-            ships_common = count_ships([i.split(chr(9)) for i in form.text.data.splitlines()])
+            ships_common = count_ships([i.replace("\xa0", "").replace("-", "").split(chr(9)) for i in form.text.data.splitlines()])
             url = ships_common['url']
-
-            r.mset({'max': 100})
             return redirect(f'/{url}')
 
 
@@ -54,7 +49,7 @@ def index():
             url = common['url']
             return redirect(f'/{url}')
 
-    return render_template('index.html', title='Scan Page', form=form)
+    return render_template('index.html', title='Hello!', form=form)
 
 
 @app.route('/<url>', methods=['GET', 'POST'])
@@ -76,11 +71,18 @@ def scan_url(url):
 
     if 'corporations' not in data:
         ships_common = data
-        ships_total = dict(sorted(ships_common['ships_total'].items(), key=lambda x: x[1], reverse=True))
+        ships_total = dict(sorted(ships_common['ships_useful'].items(), key=lambda x: x[1], reverse=True))
         types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
+        types_num = len(ships_total)
+        ships_num = sum([i[0] for i in ships_total.values()])
         url_name = f"/{ships_common['url']}"
         exec_time = round(time.time() - start_time, 3)
-        return render_template('shipDb.html', title='Ships scan result', exec_time=exec_time, ships_total= ships_total, types_total= types_total, url=url_name)
+        return render_template('shipDb.html', title=f"{ships_num} ships in system", exec_time=exec_time, ships_total= ships_total, types_total= types_total, url=url_name,
+                               current_time = current_time, scan_time = scan_time,
+                               scan_date = scan_date, time_delta = time_delta,
+                               types_num = types_num,
+                               ships_num = ships_num,
+                               ships_common=ships_common)
     else:
 
         total_alliance = dict(sorted(data['alliances'].items(), key=lambda x: x[1].get('count'), reverse=True))

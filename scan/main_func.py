@@ -311,24 +311,33 @@ def count_ally(char_affil: list):
 
 
 def count_ships(result: list) -> dict:
-    ships_common = {'ships_total': {}, 'types_total': {}, 'url': {}}
+    ships_common = {'ships_total': {}, 'ships_useful': {},'types_total': {}, 'url': {}}
     with open('data.json', 'r', encoding='utf-8') as file:
         ships = json.load(file)
+    print(result)
+    for scan_line in result:
+        if scan_line[0].isdigit():
+            uid = scan_line[0]
+            ship_name = scan_line[1]
+            ship_type = scan_line[2]
+            ships_common['ships_total'].setdefault(ship_type, [0, uid])
+            ships_common['ships_total'][ship_type][0] += 1
+            for key in ships.keys():
+                print("scanline", scan_line)
+                if scan_line[2] in ships[key]:
+                    ships_common['types_total'].setdefault(key, 0)
+                    ships_common['types_total'][key] += 1
+                    ships_common['ships_useful'].setdefault(ship_type, [0, uid])
+                    ships_common['ships_useful'][ship_type][0] += 1
+                    break
 
-    for ship_name in result:
-        ships_common['ships_total'].setdefault(ship_name[2], 0)
-        ships_common['ships_total'][ship_name[2]] += 1
-
-        for key in ships.keys():
-            if ship_name[2] in ships[key]:
-                ships_common['types_total'].setdefault(key, 0)
-                ships_common['types_total'][key] += 1
-                break
     url = uuid.uuid4().hex
     ships_common['url'] = url
     u = ShipDB(data=json.dumps(ships_common), url=url)
     db.session.add(u)
     db.session.commit()
+
+    print(ships_common)
 
     return ships_common
 

@@ -1,68 +1,70 @@
 {% extends "base.html" %}
+
 {% block content %}
 
-
   <div class="row">
-    <div class="col-md-6">
-        <h3>  In local: {{ total_count }}
+    <div class="col-md-1">
+        <h3>  In local: <b>{{ total_count }}</b>
      <button type="button" id="btnCopy" class="btn btn-primary">Copy Link</button></h3>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-2">
 
-        <h2> Date: {{ scan_date }}</h2>
-        <h2> Time: {{ scan_time}}</h2>
-        <h2> Time ago: {{ time_delta }}</h2>
-    </div>
+
+        <h4> Date: {{ scan_date }}</h4>
+        <h4> Time: {{ scan_time}}</h4>
+        <h4> Time ago: {{ time_delta }}</h4>
     </div>
 
- <div class="row">
+    <div class="col-md-9"></div>
+    </div>
+        <div class="line"></div>
+
+
+{#    NEW#}
+
+       <div class="row justify-content-center">
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-6">
-                    <div class=""> <h3> Object on scan:  </h3></div>
+                    <div class=""> <h3> Ships: {{ ships_num }} </h3></div>
 
-      <ul  id="ships">
+                    <ul  id="objects">
                     {% for key, value in ships_total.items()  %}
-                        <li class="margins" data-ship="111">
+                        <li class="margins bold_link " data-object="{{ value[1] }}">
                         <div class = "row">
                             <div class = "col-md-2">
-
-{#                            <img src="https://images.evetech.net/alliances/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">#}
-{#                                https://images.evetech.net/types/17186/render?size=64#}
+                            <img src="https://images.evetech.net/types/{{ value[1] }}/render?size=64" class="img_border" alt="{{ value["Name"] }}">
                             </div>
 
                             <div class="col-md-7">
-                            {{ key }}
+                                {{ key }}
+
 {#                                <a href="https://zkillboard.com/alliance/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>#}
                             </div>
                         <div class="col-md-3">
                     <div class=" mark-large">
 
-                           {{ value }}
+                           {{ value[0] }}
                     </div>
-
-
-                        </div>
+                    </div>
                        </div>
-
                         </li>
                     {% endfor %}
-
                     </ul>
 
 
 				</div>
 				<div class="col-md-6">
 				  <div class="">	<h3>
-						Ship types:
+						Types: {{ types_num }}
 					</h3>
                   </div>
                           <ul id="types">
-                    {% for key, value in types_total.items()  %}
-                        <li data-alliance="111">
+                    {% for key, value in types_total.items() %}
+                        <li class="margins bold_link " data-ship="{{key["ally_uid"] }}">
                         <div class = "row">
-                             <div class = "col-md-2">
-                                 {{ key }}
+                            <div class = "col-md-2">
+                                {{ key }}
 {#                            <img src="https://images.evetech.net/corporations/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">#}
                             </div>
 
@@ -70,7 +72,7 @@
 
 {#                                <a href="https://zkillboard.com/corporation/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>#}
                             </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 ">
                             <div class="mark-large">
                         {{ value }}
                             </div>
@@ -88,23 +90,102 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
-			<div class="card mb-3" style="max-width: 18rem;">
-  <div class="card-header"> <h3>Info:</h3></div>
-  <div class="card-body">
 
-    <p class="card-text"><ul>
-                    <li>Queries:{{ total_query }}</li>
-                    <li>Time :{{ current_time }}</li>
-                    <li>Date : {{ current_date }}</li>
-
-                </ul>
-      </p>
-  </div>
-</div>
-
-		</div>
 	</div>
+
+
+
+    {#    NEW#}
+
+{# <div class="row">#}
+{#		<div class="col-md-8">#}
+{#			<div class="row">#}
+{#				<div class="col-md-6">#}
+{#                    <div class=""> <h3> Object on scan:  </h3></div>#}
+{##}
+{#      <ul  id="ships">#}
+{#                    {% for key, value in ships_total.items()  %}#}
+{#                        <li class="margins" data-ship="111">#}
+{#                        <div class = "row">#}
+{#                            <div class = "col-md-2">#}
+{##}
+{##}
+{#                            </div>#}
+{##}
+{#                            <div class="col-md-7">#}
+{#                            {{ key }}#}
+{##}
+{#                            </div>#}
+{#                        <div class="col-md-3">#}
+{#                    <div class=" mark-large">#}
+{##}
+{#                           {{ value }}#}
+{#                    </div>#}
+{##}
+{##}
+{#                        </div>#}
+{#                       </div>#}
+{##}
+{#                        </li>#}
+{#                    {% endfor %}#}
+{##}
+{#                    </ul>#}
+{##}
+{##}
+{#				</div>#}
+{#				<div class="col-md-6">#}
+{#				  <div class="">	<h3>#}
+{#						Ship types:#}
+{#					</h3>#}
+{#                  </div>#}
+{#                          <ul id="types">#}
+{#                    {% for key, value in types_total.items()  %}#}
+{#                        <li data-alliance="111">#}
+{#                        <div class = "row">#}
+{#                             <div class = "col-md-2">#}
+{#                                 {{ key }}#}
+{#                            <img src="https://images.evetech.net/corporations/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">#}
+{#                            </div>#}
+{##}
+{#                            <div class="col-md-7">#}
+{##}
+{#                                <a href="https://zkillboard.com/corporation/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>#}
+{#                            </div>#}
+{#                        <div class="col-md-3">#}
+{#                            <div class="mark-large">#}
+{#                        {{ value }}#}
+{#                            </div>#}
+{##}
+{##}
+{#                        </div>#}
+{#                       </div>#}
+{##}
+{#                        </li>#}
+{#                    {% endfor %}#}
+{##}
+{#                    </ul>#}
+{##}
+{##}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+{#		<div class="col-md-4">#}
+{#			<div class="card mb-3" style="max-width: 18rem;">#}
+{#  <div class="card-header"> <h3>Info:</h3></div>#}
+{#  <div class="card-body">#}
+{##}
+{#    <p class="card-text"><ul>#}
+{#                    <li>Queries:{{ total_query }}</li>#}
+{#                    <li>Time :{{ current_time }}</li>#}
+{#                    <li>Date : {{ current_date }}</li>#}
+{##}
+{#                </ul>#}
+{#      </p>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#		</div>#}
+{#	</div>#}
 
 
 
