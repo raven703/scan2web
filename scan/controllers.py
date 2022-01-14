@@ -35,6 +35,7 @@ def index():
         if chr(9) in form.text.data:
 
             ships_common = count_ships([i.replace("\xa0", "").replace("-", "").split(chr(9)) for i in form.text.data.splitlines()])
+            (print(ships_common))
             url = ships_common['url']
             return redirect(f'/{url}')
 

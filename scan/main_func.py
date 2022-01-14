@@ -314,7 +314,7 @@ def count_ships(result: list) -> dict:
     ships_common = {'ships_total': {}, 'ships_useful': {},'types_total': {}, 'url': {}}
     with open('data.json', 'r', encoding='utf-8') as file:
         ships = json.load(file)
-    print(result)
+    print("result is", result)
     for scan_line in result:
         if scan_line[0].isdigit():
             uid = scan_line[0]
@@ -323,7 +323,7 @@ def count_ships(result: list) -> dict:
             ships_common['ships_total'].setdefault(ship_type, [0, uid])
             ships_common['ships_total'][ship_type][0] += 1
             for key in ships.keys():
-                print("scanline", scan_line)
+
                 if scan_line[2] in ships[key]:
                     ships_common['types_total'].setdefault(key, 0)
                     ships_common['types_total'][key] += 1
