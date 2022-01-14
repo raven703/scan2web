@@ -1,22 +1,35 @@
-import time
+import os, time
 
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, Response
 from app import app
 
 from scan.forms import ScanForm
 from scan.main_func import *
 from datetime import datetime
 
+r = redis.Redis(host="pserv")
 
 db.create_all()
-@app.route('/index2', methods=['GET'])
+
+
+@app.route('/progress')
+def progress():
+    def generate():
+
+        while True:
+            yield 'data: ' + '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}' + '}\n\n'
+            time.sleep(.3)
+    return Response(generate(), mimetype='text/event-stream')
+
+
+@app.route('/index2')
 def index2():
     return render_template('index2.html')
-
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+    r.mset({'max': 0})
 
     form = ScanForm()
     if form.validate_on_submit():
@@ -26,7 +39,8 @@ def index():
 
             ships_common = count_ships([i.split(chr(9)) for i in form.text.data.splitlines()])
             url = ships_common['url']
-            # exec_time = round(time.time() - start_time, 3)
+
+            r.mset({'max': 100})
             return redirect(f'/{url}')
 
 

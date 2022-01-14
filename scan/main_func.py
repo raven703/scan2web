@@ -1,11 +1,14 @@
 from esipy import EsiApp
 from esipy import EsiClient
-import re
+import redis
 import requests
 import json
 import datetime
 import re
 import uuid
+import time
+
+
 
 from flask_sqlalchemy import SQLAlchemy
 from scan.models import UserDB
@@ -32,6 +35,7 @@ client = EsiClient(
     headers={'User-Agent': 'first test app'},
     raw_body_only=False,  # default False, set to True to never parse response and only return raw JSON string content.
 )
+
 
 
 def get_alliance_info(a_id):
@@ -72,6 +76,7 @@ def convert_to_tranq_post(data: list) -> str:  # convert to Tranq POST string fo
 
 
 def db_check_user(user):
+
     year = user.timestamp.year
     month = user.timestamp.month
     day = user.timestamp.day
@@ -80,13 +85,21 @@ def db_check_user(user):
     delta = now - past_date
     if delta.days > 7:
         char = get_char_info(user.uid)
-        u = UserDB.query.filter(UserDB.name == user.name).first()
-        if 'alliance_id' in char:
-            u.a_id = char.alliance_id
-        u.c_id = char.corporation_id
-        u.timestamp = datetime.datetime.utcnow()
-        db.session.commit()
 
+        if "error" not in char:
+            u = UserDB.query.filter(UserDB.name == user.name).first()
+            if 'alliance_id' in char:
+                u.a_id = char.alliance_id
+            u.c_id = char.corporation_id
+            u.timestamp = datetime.datetime.utcnow()
+            db.session.commit()
+        elif "Character has been deleted" in char.error:
+
+            deleteUser = UserDB.query.filter(UserDB.name == user.name).first()
+
+            if deleteUser is not None:
+                db.session.delete(deleteUser)
+                db.session.commit()
     return
 
 def chunc(lst, n):
@@ -97,6 +110,9 @@ def chunc(lst, n):
 def check_chars_from_local(data: str):
     # this func gets characters from local scan, check them in DB and if not: ask TRANQ for info and put into DB
     # return 2 style data: raw as list and formatted as TRANQ post request
+
+    r = redis.Redis(host="pserv")
+    r.mset({"max": 0})
 
     raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
     if re.search(r'[^a-zA-Z0-9 \'\-`!]', ''.join(raw_data)):
@@ -119,11 +135,15 @@ def check_chars_from_local(data: str):
 
     if len(request_list) > 0:
 
-        request_list = list(chunc(request_list, 50))
+        request_list = list(chunc(request_list, 25))
+        proc_value = 100 // len(request_list)
+        counter = 0
+
         for req_list in request_list:
-            # print("REQ list", req_list)
+            r.mset({'current': counter + proc_value})
             data_id = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
                                 data=convert_to_tranq_post(req_list)).json()
+
             # get chars ID from server
             if 'characters' in data_id:
                 for slovar in data_id['characters']:
@@ -140,6 +160,9 @@ def check_chars_from_local(data: str):
                         u = UserDB(uid=slovar['id'], name=slovar['name'], c_id=char_info.corporation_id)
                         db.session.add(u)
                         db.session.commit()
+            counter += proc_value
+    r.mset({'current': 0})
+    r.mset({'max': 100})
 
     return convert_to_tranq_post(cid_list), cid_list, total_query
 
@@ -191,15 +214,20 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
 
 
 def aff_new(charid: list):
-    # this func makes affilataion swagger style response  char affilation
+    # this func makes affilation swagger style response  char affilation
     aff_list = []
     for uid in charid:
         char_data = UserDB.query.filter(UserDB.uid == uid).first()
-        if char_data.a_id is None:
-            aff_list.append({'character_id': int(uid), 'corporation_id': int(char_data.c_id)})
-        else:
-            aff_list.append(
-                {'alliance_id': int(char_data.a_id), 'character_id': int(uid), 'corporation_id': int(char_data.c_id)})
+
+        if char_data is not None:
+            if char_data.a_id is None:
+                aff_list.append({'character_id': int(uid), 'corporation_id': int(char_data.c_id)})
+            else:
+                aff_list.append({
+                    'alliance_id': int(char_data.a_id),
+                    'character_id': int(uid),
+                    'corporation_id': int(char_data.c_id)
+                })
     return aff_list
 
 
