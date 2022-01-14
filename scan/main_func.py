@@ -114,7 +114,7 @@ def check_chars_from_local(data: str):
     r = redis.Redis(host="pserv")
     r.mset({"max": 0})
 
-    raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
+    raw_data = list(set([i for i in data.strip().replace('\r', '').split('\n') if len(i) > 0]))
     if re.search(r'[^a-zA-Z0-9 \'\-`!]', ''.join(raw_data)):
         return 'error in re', 'error', 'error'
 
