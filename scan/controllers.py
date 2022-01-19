@@ -1,4 +1,5 @@
 import os, time
+import csv
 
 from flask import render_template, redirect, url_for, Response
 from app import app
@@ -22,6 +23,12 @@ def progress():
 
 @app.route('/index2')
 def index2():
+    # with open('allships.csv') as file:
+    #     data = csv.DictReader(file, delimiter=";")
+    #     for row in list(data):
+    #         u = InvTypes(typeid=row["TYPEID"], groupid=row["GROUPID"], typename=row["TYPENAME"])
+    #         db.session.add(u)
+    #         db.session.commit()
     return render_template('index2.html')
 
 @app.route('/', methods=['GET', 'POST'])
@@ -35,7 +42,7 @@ def index():
         if chr(9) in form.text.data:
 
             ships_common = count_ships([i.replace("\xa0", "").replace("-", "").split(chr(9)) for i in form.text.data.splitlines()])
-            (print(ships_common))
+
             url = ships_common['url']
             return redirect(f'/{url}')
 
@@ -75,6 +82,7 @@ def scan_url(url):
         ships_total = dict(sorted(ships_common['ships_useful'].items(), key=lambda x: x[1], reverse=True))
         types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
         types_num = len(ships_total)
+        # print("ships_total:  ", ships_total)
         ships_num = sum([i[0] for i in ships_total.values()])
         url_name = f"/{ships_common['url']}"
         exec_time = round(time.time() - start_time, 3)

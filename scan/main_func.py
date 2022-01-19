@@ -13,6 +13,7 @@ import time
 from flask_sqlalchemy import SQLAlchemy
 from scan.models import UserDB
 from scan.models import ShipDB
+from scan.models import InvTypes
 from app import db
 
 headers = {
@@ -311,12 +312,15 @@ def count_ally(char_affil: list):
 
 
 def count_ships(result: list) -> dict:
-    ships_common = {'ships_total': {}, 'ships_useful': {},'types_total': {}, 'url': {}}
+    ships_common = {'ships_total': {}, 'ships_useful': {}, 'types_total': {}, 'url': {}}
     with open('data.json', 'r', encoding='utf-8') as file:
         ships = json.load(file)
-    print("result is", result)
+    # print("result is", result)
     for scan_line in result:
+        # print(scan_line)
         if scan_line[0].isdigit():
+
+            print("dscan active")
             uid = scan_line[0]
             ship_name = scan_line[1]
             ship_type = scan_line[2]
@@ -330,6 +334,24 @@ def count_ships(result: list) -> dict:
                     ships_common['ships_useful'].setdefault(ship_type, [0, uid])
                     ships_common['ships_useful'][ship_type][0] += 1
                     break
+        elif ("Squad Member" or "Squad Commander") in scan_line:
+            print("fleet scan active")
+            print(scan_line)
+
+            uid = 0
+            ship_name = scan_line[2]
+            ship_type = scan_line[3]
+            shipid = InvTypes.query.filter(InvTypes.typename == ship_name).first()
+            print("shipid is:", shipid)
+            if shipid is not None:
+                ships_common['ships_useful'].setdefault(ship_name, [0, shipid.typeid])
+                ships_common['ships_useful'][ship_name][0] += 1
+                ships_common['types_total'].setdefault(ship_type, 0)
+                ships_common['types_total'][ship_type] += 1
+
+
+            #print(ships_common)
+
 
     url = uuid.uuid4().hex
     ships_common['url'] = url
@@ -337,7 +359,7 @@ def count_ships(result: list) -> dict:
     db.session.add(u)
     db.session.commit()
 
-    print(ships_common)
+
 
     return ships_common
 

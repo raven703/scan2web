@@ -20,3 +20,11 @@ class ShipDB(db.Model):
     data = db.Column(db.String(64), index=True, unique=False)
     url = db.Column(db.String(64), index=True, unique=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+
+class InvTypes(db.Model):
+
+    typeid = db.Column(db.Integer, primary_key=True)
+    groupid = db.Column(db.String(64), index=True, unique=False)
+    typename = db.Column(db.String(64), index=True, unique=False)
+
