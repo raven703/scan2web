@@ -1,0 +1,405 @@
+TYPEID;GROUPID;TYPENAME
+672;31;Caldari Shuttle
+11129;31;Gallente Shuttle
+11132;31;Minmatar Shuttle
+11134;31;Amarr Shuttle
+21097;31;Goru's Shuttle
+21628;31;Guristas Shuttle
+27299;31;Civilian Amarr Shuttle
+27301;31;Civilian Caldari Shuttle
+27303;31;Civilian Gallente Shuttle
+27305;31;Civilian Minmatar Shuttle
+29266;31;Apotheosis
+29328;31;Amarr Media Shuttle
+29330;31;Caldari Media Shuttle
+29332;31;Gallente Media Shuttle
+29334;31;Minmatar Media Shuttle
+30842;31;InterBus Shuttle
+33513;31;Leopard
+34496;31;Council Diplomatic Shuttle
+582;25;Bantam
+583;25;Condor
+584;25;Griffin
+585;25;Slasher
+586;25;Probe
+587;25;Rifter
+589;25;Executioner
+590;25;Inquisitor
+591;25;Tormentor
+592;25;Navitas
+593;25;Tristan
+594;25;Incursus
+595;25;Gallente Police Ship
+597;25;Punisher
+598;25;Breacher
+599;25;Burst
+600;25;Minmatar Peacekeeper Ship
+602;25;Kestrel
+603;25;Merlin
+605;25;Heron
+607;25;Imicus
+608;25;Atron
+609;25;Maulus
+613;25;Devourer
+614;25;Fury
+616;25;Medusa
+618;25;Lynx
+619;25;Swordspine
+1896;25;Concord Police Frigate
+1898;25;Concord SWAT Frigate
+1900;25;Concord Army Frigate
+1902;25;Concord Special Ops Frigate
+2161;25;Crucifier
+3532;25;Echelon
+3751;25;SOCT 1
+3753;25;SOCT 2
+3766;25;Vigil
+3768;25;Amarr Police Frigate
+11019;25;Cockroach
+11940;25;Gold Magnate
+11942;25;Silver Magnate
+17360;25;Immovable Enigma
+17619;25;Caldari Navy Hookbill
+17703;25;Imperial Navy Slicer
+17705;25;Khanid Navy Frigate
+17707;25;Mordus Frigate
+17812;25;Republic Fleet Firetail
+17841;25;Federation Navy Comet
+17924;25;Succubus
+17926;25;Cruor
+17928;25;Daredevil
+17930;25;Worm
+17932;25;Dramiel
+29248;25;Magnate
+32880;25;Venture
+32983;25;Sukuuvestaa Heron
+32985;25;Inner Zone Shipping Imicus
+32987;25;Sarum Magnate
+32989;25;Vherokior Probe
+33190;25;Tash-Murkon Magnate
+33468;25;Astero
+33655;25;Punisher Kador Edition
+33657;25;Punisher Tash-Murkon Edition
+33659;25;Merlin Nugoeihuvi Edition
+33661;25;Merlin Wiyrkomi Edition
+33663;25;Rifter Nefantar Edition
+33665;25;Rifter Krusual Edition
+33667;25;Incursus Aliastra Edition
+33669;25;Incursus Inner Zone Shipping Edition
+33677;25;Police Pursuit Comet
+33816;25;Garmur
+34443;25;Tristan Quafe Edition
+37453;25;Crucifier Navy Issue
+37454;25;Vigil Fleet Issue
+37455;25;Griffin Navy Issue
+37456;25;Maulus Navy Issue
+47269;25;Damavik
+54731;25;Skybreaker
+58745;25;AIR Civilian Astero
+620;26;Osprey
+621;26;Caracal
+622;26;Stabber
+623;26;Moa
+624;26;Maller
+625;26;Augoror
+626;26;Vexor
+627;26;Thorax
+628;26;Arbitrator
+629;26;Rupture
+630;26;Bellicose
+631;26;Scythe
+632;26;Blackbird
+633;26;Celestis
+634;26;Exequror
+635;26;Opux Luxury Yacht
+1904;26;Concord Police Cruiser
+2006;26;Omen
+11011;26;Guardian-Vexor
+17634;26;Caracal Navy Issue
+17709;26;Omen Navy Issue
+17713;26;Stabber Fleet Issue
+17715;26;Gila
+17718;26;Phantasm
+17720;26;Cynabal
+17722;26;Vigilant
+17843;26;Vexor Navy Issue
+17922;26;Ashimmu
+25560;26;Opux Dragoon Yacht
+29336;26;Scythe Fleet Issue
+29337;26;Augoror Navy Issue
+29340;26;Osprey Navy Issue
+29344;26;Exequror Navy Issue
+33470;26;Stratios
+33553;26;Stratios Emergency Responder
+33639;26;Omen Kador Edition
+33641;26;Omen Tash-Murkon Edition
+33643;26;Caracal Nugoeihuvi Edition
+33645;26;Caracal Wiyrkomi Edition
+33647;26;Stabber Nefantar Edition
+33649;26;Stabber Krusual Edition
+33651;26;Thorax Aliastra Edition
+33653;26;Thorax Inner Zone Shipping Edition
+33818;26;Orthrus
+34445;26;Vexor Quafe Edition
+34475;26;???YC117????
+34590;26;Victorieux Luxury Yacht
+47270;26;Vedmak
+49712;26;Rodiva
+52267;26;Test Site Maller
+54732;26;Stormbringer
+11978;832;Scimitar
+11985;832;Basilisk
+11987;832;Guardian
+11989;832;Oneiros
+32790;832;Etana
+42245;832;Rabisu
+49713;832;Zarmazd
+16236;420;Coercer
+16238;420;Cormorant
+16240;420;Catalyst
+16242;420;Thrasher
+32840;420;InterBus Catalyst
+32842;420;Intaki Syndicate Catalyst
+32844;420;Inner Zone Shipping Catalyst
+32846;420;Quafe Catalyst
+32848;420;Aliastra Catalyst
+32872;420;Algos
+32874;420;Dragoon
+32876;420;Corax
+32878;420;Talwar
+33099;420;Nefantar Thrasher
+33877;420;Catalyst Serpentis Edition
+33879;420;Coercer Blood Raiders Edition
+33881;420;Cormorant Guristas Edition
+33883;420;Thrasher Thukker Tribe Edition
+42685;420;Sunesis
+49710;420;Kikimora
+22452;541;Heretic
+22456;541;Sabre
+22460;541;Eris
+22464;541;Flycatcher
+34317;1305;Confessor
+34562;1305;Svipul
+34828;1305;Jackdaw
+35683;1305;Hecate
+37480;1534;Bifrost
+37481;1534;Pontifex
+37482;1534;Stork
+37483;1534;Magus
+52254;1534;Draugur
+4302;1201;Oracle
+4306;1201;Naga
+4308;1201;Talos
+4310;1201;Tornado
+3756;419;Gnosis
+16227;419;Ferox
+16229;419;Brutix
+16231;419;Cyclone
+16233;419;Prophecy
+24696;419;Harbinger
+24698;419;Drake
+24700;419;Myrmidon
+24702;419;Hurricane
+33151;419;Brutix Navy Issue
+33153;419;Drake Navy Issue
+33155;419;Harbinger Navy Issue
+33157;419;Hurricane Fleet Issue
+33869;419;Brutix Serpentis Edition
+33871;419;Cyclone Thukker Tribe Edition
+33873;419;Ferox Guristas Edition
+33875;419;Prophecy Blood Raiders Edition
+34473;419;???YC117????
+49711;419;Drekavac
+22442;540;Eos
+22444;540;Sleipnir
+22446;540;Vulture
+22448;540;Absolution
+22466;540;Astarte
+22468;540;Claymore
+22470;540;Nighthawk
+22474;540;Damnation
+638;27;Raven
+639;27;Tempest
+640;27;Scorpion
+641;27;Megathron
+642;27;Apocalypse
+643;27;Armageddon
+644;27;Typhoon
+645;27;Dominix
+1912;27;Concord Police Battleship
+1914;27;Concord Special Ops Battleship
+1916;27;Concord SWAT Battleship
+1918;27;Concord Army Battleship
+4005;27;Scorpion Ishukone Watch
+11936;27;Apocalypse Imperial Issue
+11938;27;Armageddon Imperial Issue
+13202;27;Megathron Federate Issue
+17636;27;Raven Navy Issue
+17726;27;Apocalypse Navy Issue
+17728;27;Megathron Navy Issue
+17732;27;Tempest Fleet Issue
+17736;27;Nightmare
+17738;27;Machariel
+17740;27;Vindicator
+17918;27;Rattlesnake
+17920;27;Bhaalgorn
+24688;27;Rokh
+24690;27;Hyperion
+24692;27;Abaddon
+24694;27;Maelstrom
+26840;27;Raven State Issue
+26842;27;Tempest Tribal Issue
+32305;27;Armageddon Navy Issue
+32307;27;Dominix Navy Issue
+32309;27;Scorpion Navy Issue
+32311;27;Typhoon Fleet Issue
+33472;27;Nestor
+33623;27;Abaddon Tash-Murkon Edition
+33625;27;Abaddon Kador Edition
+33627;27;Rokh Nugoeihuvi Edition
+33629;27;Rokh Wiyrkomi Edition
+33631;27;Maelstrom Nefantar Edition
+33633;27;Maelstrom Krusual Edition
+33635;27;Hyperion Aliastra Edition
+33637;27;Hyperion Inner Zone Shipping Edition
+33820;27;Barghest
+34118;27;Megathron Quafe Edition
+34151;27;Rattlesnake Victory Edition
+34213;27;Apocalypse Blood Raider Edition
+34215;27;Apocalypse Kador Edition
+34217;27;Apocalypse Tash-Murkon Edition
+34225;27;Raven Guristas Edition
+34227;27;Raven Kaalakiota Edition
+34229;27;Raven Nugoeihuvi Edition
+34237;27;Megathron Police Edition
+34239;27;Megathron Inner Zone Shipping Edition
+34247;27;Tempest Justice Edition
+34249;27;Tempest Krusual Edition
+34251;27;Tempest Nefantar Edition
+34441;27;Dominix Quafe Edition
+34457;27;?????YC117????
+34459;27;?????YC117????
+34461;27;????YC117????
+34463;27;????YC117????
+34465;27;??????YC117????
+34467;27;?????YC117????
+34469;27;???YC117????
+34471;27;???YC117????
+47271;27;Leshak
+47466;27;Praxis
+54733;27;Thunderchild
+22428;898;Redeemer
+22430;898;Sin
+22436;898;Widow
+22440;898;Panther
+44996;898;Marshal
+28659;900;Paladin
+28661;900;Kronos
+28665;900;Vargur
+28710;900;Golem
+34219;900;Paladin Blood Raider Edition
+34221;900;Paladin Kador Edition
+34223;900;Paladin Tash-Murkon Edition
+34231;900;Golem Guristas Edition
+34233;900;Golem Kaalakiota Edition
+34235;900;Golem Nugoeihuvi Edition
+34241;900;Kronos Police Edition
+34243;900;Kronos Quafe Edition
+34245;900;Kronos Inner Zone Shipping Edition
+34253;900;Vargur Justice Edition
+34255;900;Vargur Krusual Edition
+34257;900;Vargur Nefantar Edition
+19720;485;Revelation
+19722;485;Naglfar
+19724;485;Moros
+19726;485;Phoenix
+34339;485;Moros Interbus Edition
+34341;485;Naglfar Justice Edition
+34343;485;Phoenix Wiyrkomi Edition
+34345;485;Revelation Sarum Edition
+42124;485;Vehement
+42243;485;Chemosh
+45647;485;Caiman
+52907;485;Zirnitra
+28844;902;Rhea
+28846;902;Nomad
+28848;902;Anshar
+28850;902;Ark
+20183;513;Providence
+20185;513;Charon
+20187;513;Obelisk
+20189;513;Fenrir
+34328;513;Bowhead
+671;30;Erebus
+3764;30;Leviathan
+11567;30;Avatar
+23773;30;Ragnarok
+42126;30;Vanquisher
+42241;30;Molok
+45649;30;Komodo
+23757;547;Archon
+23911;547;Thanatos
+23915;547;Chimera
+24483;547;Nidhoggur
+42132;547;Vanguard
+3514;659;Revenant
+3628;659;Nation
+22852;659;Hel
+23913;659;Nyx
+23917;659;Wyvern
+23919;659;Aeon
+42125;659;Vendetta
+28352;883;Rorqual
+33687;883;Rorqual ORE Development Edition
+37604;1538;Apostle
+37605;1538;Minokawa
+37606;1538;Lif
+37607;1538;Ninazu
+42133;1538;Venerable
+42242;1538;Dagon
+45645;1538;Loggerhead
+648;28;Badger
+649;28;Tayra
+650;28;Nereus
+651;28;Hoarder
+652;28;Mammoth
+653;28;Wreathe
+654;28;Kryos
+655;28;Epithal
+656;28;Miasmos
+657;28;Iteron Mark V
+1944;28;Bestower
+2863;28;Primae
+2998;28;Noctis
+4363;28;Miasmos Quafe Ultra Edition
+4388;28;Miasmos Quafe Ultramarine Edition
+19744;28;Sigil
+32811;28;Miasmos Amastris Edition
+33689;28;Iteron Inner Zone Shipping Edition
+33691;28;Tayra Wiyrkomi Edition
+33693;28;Mammoth Nefantar Edition
+33695;28;Bestower Tash-Murkon Edition
+28606;941;Orca
+33685;941;Orca ORE Development Edition
+42244;941;Porpoise
+17476;463;Covetor
+17478;463;Retriever
+17480;463;Procurer
+22544;543;Hulk
+22546;543;Skiff
+22548;543;Mackinaw
+33683;543;Mackinaw ORE Development Edition
+588;237;Reaper
+596;237;Impairor
+601;237;Ibis
+606;237;Velator
+615;237;Immolator
+617;237;Echo
+1233;237;Polaris Enigma Frigate
+9854;237;Polaris Inspector Frigate
+9858;237;Polaris Centurion TEST
+9860;237;Polaris Legatus Frigate
+9862;237;Polaris Centurion Frigate
+33079;237;Hematos
+33081;237;Taipan
+33083;237;Violator

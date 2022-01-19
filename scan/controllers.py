@@ -23,12 +23,12 @@ def progress():
 
 @app.route('/index2')
 def index2():
-    # with open('allships.csv') as file:
-    #     data = csv.DictReader(file, delimiter=";")
-    #     for row in list(data):
-    #         u = InvTypes(typeid=row["TYPEID"], groupid=row["GROUPID"], typename=row["TYPENAME"])
-    #         db.session.add(u)
-    #         db.session.commit()
+    with open('addbase.csv') as file:
+        data = csv.DictReader(file, delimiter=";")
+        for row in list(data):
+            u = InvTypes(typeid=row["TYPEID"], groupid=row["GROUPID"], typename=row["TYPENAME"])
+            db.session.add(u)
+            db.session.commit()
     return render_template('index2.html')
 
 @app.route('/', methods=['GET', 'POST'])
