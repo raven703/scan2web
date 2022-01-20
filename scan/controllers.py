@@ -79,10 +79,10 @@ def scan_url(url):
 
     if 'corporations' not in data:
         ships_common = data
-        ships_total = dict(sorted(ships_common['ships_useful'].items(), key=lambda x: x[1], reverse=True))
-        types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1], reverse=True))
+        ships_total = dict(sorted(ships_common['ships_useful'].items(), key=lambda x: x[0], reverse=True))
+        types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[0], reverse=True))
         types_num = len(ships_total)
-        # print("ships_total:  ", ships_total)
+
         ships_num = sum([i[0] for i in ships_total.values()])
         url_name = f"/{ships_common['url']}"
         exec_time = round(time.time() - start_time, 3)

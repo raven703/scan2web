@@ -1,6 +1,11 @@
+.no-img {
+  height: 74px;
+}
 
-
-
+.chart-container {
+    width: 500px;
+    height:500px
+}
 
 /*experiment*/
 

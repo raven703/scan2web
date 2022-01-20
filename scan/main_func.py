@@ -318,20 +318,20 @@ def count_ships(result: list) -> dict:
 
     for scan_line in result:
         if scan_line[0].isdigit():
-
-
             uid = scan_line[0]
-            ship_type = scan_line[2]
-            ships_common['ships_total'].setdefault(ship_type, [0, uid])
-            ships_common['ships_total'][ship_type][0] += 1
+            ship_name = scan_line[2]
+            shipid = InvTypes.query.filter(InvTypes.typename == ship_name).first()
+            ships_common['ships_total'].setdefault(ship_name, [0, uid])
+            ships_common['ships_total'][ship_name][0] += 1
+
 
             for key in ships.keys():
-
-                if ship_type in ships[key]:
-                    ships_common['types_total'].setdefault(key, 0)
-                    ships_common['types_total'][key] += 1
-                    ships_common['ships_useful'].setdefault(ship_type, [0, uid])
-                    ships_common['ships_useful'][ship_type][0] += 1
+                # [если истина] if [выражение] else [если ложь]
+                if ship_name in ships[key]:
+                    ships_common['types_total'].setdefault(key, [0, shipid.groupid if shipid is not None else 0])
+                    ships_common['types_total'][key][0] += 1
+                    ships_common['ships_useful'].setdefault(ship_name, [0, uid, shipid.groupid if shipid is not None else 0])
+                    ships_common['ships_useful'][ship_name][0] += 1
                     break
 
         elif ("Squad Member" or "Squad Commander") in scan_line:
@@ -340,9 +340,6 @@ def count_ships(result: list) -> dict:
             shipid = InvTypes.query.filter(InvTypes.typename == ship_name).first()
 
             if shipid is not None:
-                #group_id = InvTypes.query.filter(InvTypes.typename == ship_name).first()
-
-
                 ships_common['ships_useful'].setdefault(ship_name, [0, shipid.typeid, shipid.groupid])
                 ships_common['ships_useful'][ship_name][0] += 1
                 ships_common['types_total'].setdefault(ship_type, [0, shipid.groupid])

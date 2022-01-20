@@ -20,11 +20,16 @@
         <div class="line"></div>
 
 
-{#    NEW#}
 
        <div class="row justify-content-center">
-		<div class="col-md-8">
+	{#            CHART#}
+<div class="chart-container">
+            <canvas id="myChart" width="100" height="100"></canvas>
+</div>
+           <div class="col-md-8">
 			<div class="row">
+
+
 				<div class="col-md-6">
                     <div class=""> <h3> Ships: {{ ships_num }} </h3></div>
 
@@ -39,7 +44,7 @@
                             <div class="col-md-7">
                                 {{ key }}
 
-{#                                <a href="https://zkillboard.com/alliance/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>#}
+{##}
                             </div>
                         <div class="col-md-3">
                     <div class=" mark-large">
@@ -61,16 +66,17 @@
                   </div>
                           <ul id="types">
                     {% for key, value in types_total.items() %}
-                        <li class="margins bold_link " data-ship="{{ value[1] }}">
+                        <li class="margins bold_link no-img " data-ship="{{ value[1] }}">
                         <div class = "row">
                             <div class = "col-md-2">
-                                {{ key }}
-{#                            <img src="https://images.evetech.net/corporations/{{ key }}/logo?size=64" class="img_border" alt="{{ value["Name"] }}">#}
+
+{#                             <img src="https://images.evetech.net/types/13/icon?size=64" class="img_border" alt="{{ key }}">#}
+
                             </div>
 
                             <div class="col-md-7">
 
-{#                                <a href="https://zkillboard.com/corporation/{{ key }}" class="bold_link list-group-item list-group-item-action flex-column align-items-start"> {{ value["Name"] }} </a> <div>{{ value["Ticker"] }}</div></b>#}
+                              {{ key }}
                             </div>
                         <div class="col-md-3 ">
                             <div class="mark-large">
