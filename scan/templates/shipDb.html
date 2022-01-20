@@ -30,10 +30,10 @@
 
                     <ul  id="objects">
                     {% for key, value in ships_total.items()  %}
-                        <li class="margins bold_link " data-object="{{ value[1] }}">
+                        <li class="margins bold_link " data-ship="{{ value[2] }}">
                         <div class = "row">
                             <div class = "col-md-2">
-                            <img src="https://images.evetech.net/types/{{ value[1] }}/render?size=64" class="img_border" alt="{{ value["Name"] }}">
+                            <img src="https://images.evetech.net/types/{{ value[1] }}/render?size=64" class="img_border" alt="{{ key }}">
                             </div>
 
                             <div class="col-md-7">
@@ -61,7 +61,7 @@
                   </div>
                           <ul id="types">
                     {% for key, value in types_total.items() %}
-                        <li class="margins bold_link " data-ship="{{key["ally_uid"] }}">
+                        <li class="margins bold_link " data-ship="{{ value[1] }}">
                         <div class = "row">
                             <div class = "col-md-2">
                                 {{ key }}
@@ -74,7 +74,7 @@
                             </div>
                         <div class="col-md-3 ">
                             <div class="mark-large">
-                        {{ value }}
+                        {{ value[0] }}
                             </div>
 
 

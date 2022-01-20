@@ -315,42 +315,41 @@ def count_ships(result: list) -> dict:
     ships_common = {'ships_total': {}, 'ships_useful': {}, 'types_total': {}, 'url': {}}
     with open('data.json', 'r', encoding='utf-8') as file:
         ships = json.load(file)
-    # print("result is", result)
+
     for scan_line in result:
-        # print(scan_line)
         if scan_line[0].isdigit():
 
-            print("dscan active")
+
             uid = scan_line[0]
-            ship_name = scan_line[1]
             ship_type = scan_line[2]
             ships_common['ships_total'].setdefault(ship_type, [0, uid])
             ships_common['ships_total'][ship_type][0] += 1
+
             for key in ships.keys():
 
-                if scan_line[2] in ships[key]:
+                if ship_type in ships[key]:
                     ships_common['types_total'].setdefault(key, 0)
                     ships_common['types_total'][key] += 1
                     ships_common['ships_useful'].setdefault(ship_type, [0, uid])
                     ships_common['ships_useful'][ship_type][0] += 1
                     break
-        elif ("Squad Member" or "Squad Commander") in scan_line:
-            print("fleet scan active")
-            print(scan_line)
 
-            uid = 0
+        elif ("Squad Member" or "Squad Commander") in scan_line:
             ship_name = scan_line[2]
             ship_type = scan_line[3]
             shipid = InvTypes.query.filter(InvTypes.typename == ship_name).first()
-            print("shipid is:", shipid)
+
             if shipid is not None:
-                ships_common['ships_useful'].setdefault(ship_name, [0, shipid.typeid])
+                #group_id = InvTypes.query.filter(InvTypes.typename == ship_name).first()
+
+
+                ships_common['ships_useful'].setdefault(ship_name, [0, shipid.typeid, shipid.groupid])
                 ships_common['ships_useful'][ship_name][0] += 1
-                ships_common['types_total'].setdefault(ship_type, 0)
-                ships_common['types_total'][ship_type] += 1
+                ships_common['types_total'].setdefault(ship_type, [0, shipid.groupid])
+                ships_common['types_total'][ship_type][0] += 1
 
-
-            #print(ships_common)
+            # print(ships_common)
+            # print("types total: ", ships_common['types_total'])
 
 
     url = uuid.uuid4().hex
