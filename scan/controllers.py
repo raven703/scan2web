@@ -15,11 +15,14 @@ db.create_all()
 
 @app.route('/progress')
 def progress():
+
+
+
     def generate():
         while True:
-            esi_query = '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}' + '}\n\n'
-            #yield 'data: ' + '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}' + '}\n\n'
-            yield 'data:' + esi_query
+            chart_data = r.get("chart").decode("utf8")
+            esi_query = '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}'
+            yield f"data: {esi_query}, {chart_data} " + "}\n\n"
             time.sleep(0.9)
 
     return Response(generate(), mimetype='text/event-stream')
@@ -87,8 +90,12 @@ def scan_url(url):
         ships_common = data
         ships_total = dict(sorted(ships_common['ships_useful'].items(), key=lambda x: x[1][0], reverse=True))
         types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1][0], reverse=True))
-        print(ships_common)
-        print(ships_total)
+        chart_data = {'data': [], 'labels': []}
+        for key, value in types_total.items():
+            chart_data["labels"].append(key)
+            chart_data["data"].append(value[0])
+
+        r.mset({'chart': f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}'})
 
         types_num = len(ships_total)
 
