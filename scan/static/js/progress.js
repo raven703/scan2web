@@ -8,6 +8,7 @@ source.onmessage = function(event) {
 	$('.progress-bar').css('width', current + '%').attr('aria-valuenow', current);
 	$('.progress-bar-label').text(current +'%');
 
-	console.log("New message", queries["max"], queries["current"])
+	console.log("ESI queries", queries["max"], queries["current"])
 
 	}
+

@@ -16,20 +16,26 @@ db.create_all()
 @app.route('/progress')
 def progress():
     def generate():
-        yield 'data: ' + '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}' + '}\n\n'
+        while True:
+            esi_query = '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}' + '}\n\n'
+            #yield 'data: ' + '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}' + '}\n\n'
+            yield 'data:' + esi_query
+            time.sleep(0.9)
 
     return Response(generate(), mimetype='text/event-stream')
 
 
-@app.route('/index2')
-def index2():
-    with open('addbase.csv') as file:
-        data = csv.DictReader(file, delimiter=";")
-        for row in list(data):
-            u = InvTypes(typeid=row["TYPEID"], groupid=row["GROUPID"], typename=row["TYPENAME"])
-            db.session.add(u)
-            db.session.commit()
-    return render_template('index2.html')
+
+
+# @app.route('/index2')
+# def index2():
+#     with open('addbase.csv') as file:
+#         data = csv.DictReader(file, delimiter=";")
+#         for row in list(data):
+#             u = InvTypes(typeid=row["TYPEID"], groupid=row["GROUPID"], typename=row["TYPENAME"])
+#             db.session.add(u)
+#             db.session.commit()
+#     return render_template('index2.html')
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -79,8 +85,11 @@ def scan_url(url):
 
     if 'corporations' not in data:
         ships_common = data
-        ships_total = dict(sorted(ships_common['ships_useful'].items(), key=lambda x: x[0], reverse=True))
-        types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[0], reverse=True))
+        ships_total = dict(sorted(ships_common['ships_useful'].items(), key=lambda x: x[1][0], reverse=True))
+        types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1][0], reverse=True))
+        print(ships_common)
+        print(ships_total)
+
         types_num = len(ships_total)
 
         ships_num = sum([i[0] for i in ships_total.values()])
