@@ -97,10 +97,7 @@ def scan_url(url):
         chart = f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}'
         chart_data = json.dumps(chart)
 
-
-
         types_num = len(ships_total)
-
         ships_num = sum([i[0] for i in ships_total.values()])
         url_name = f"/{ships_common['url']}"
         exec_time = round(time.time() - start_time, 3)
@@ -122,14 +119,22 @@ def scan_url(url):
         total_chars = data["total_chars"]
         total_query = data["total"]
         url_name = f"/{data['url']}"
-
         dt = datetime.utcnow()
+
+        chart_data = {'data': [], 'labels': []}
+        print(total_alliance)
+        for key in total_alliance.keys():
+            chart_data["labels"].append(total_alliance[key]["Ticker"])
+            chart_data["data"].append(total_alliance[key]["count"])
+
+        chart = f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}'
+        chart_data = json.dumps(chart)
 
         exec_time = round(time.time() - start_time, 3)
         return render_template('scanDb.html', title=f"{total_chars} pilots in local",
                                total_alliance=total_alliance, total_corp=total_corp, total_query=total_query,
                                total_count=total_count, total_corps=total_corps, total_chars=total_chars,
                                exec_time=exec_time, url=url_name, current_date=current_date, current_time = current_time, scan_time = scan_time,
-                               scan_date = scan_date, time_delta = time_delta)
+                               scan_date = scan_date, time_delta = time_delta, chart_data=chart_data)
 
 
