@@ -6,6 +6,7 @@ import json
 import datetime
 import re
 import uuid
+import random
 import time
 
 
@@ -36,6 +37,27 @@ client = EsiClient(
     headers={'User-Agent': 'first test app'},
     raw_body_only=False,  # default False, set to True to never parse response and only return raw JSON string content.
 )
+
+def get_random_colors(quantity: int) -> list:
+    color_list = ['#1A9E7F', '#8EA8C3', '#406E8E', '#23395B', '#161925', '#58355E', '#7AE7C7', '#D6FFB7', '#FFF689',
+                  '#E2C2C6', '#B9929F', '#9C528B', '#610F7F', '#2F0147', '#CDD3CE', '#BBB5BD', '#AA6DA3', '#B118C8',
+                  '#A54657', '#F7EE7F', '#F1A66A', '#F26157', '#82A3A1', '#BAC7BE', '#332E3C', '#A29587', '#7DCD85', '#80AB82',
+                  '#778472', '#FF70A6', '#75485E']
+    hex_colors = []
+
+    if quantity <= len(color_list):
+        hex_colors.extend(color_list[:quantity])
+        print("hex color from func", hex_colors)
+    else:
+        hex_colors.extend(color_list[:quantity])
+
+        for i in range(quantity - len(color_list)):
+            hex_color = "#" + ''.join([random.choice('ABCDEF0123456789') for i in range(6)])
+            hex_colors.append(hex_color)
+
+
+    return hex_colors
+
 
 
 

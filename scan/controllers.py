@@ -1,6 +1,7 @@
 import os, time
 import csv
 
+
 from flask import render_template, redirect, url_for, Response
 from app import app
 
@@ -87,20 +88,20 @@ def scan_url(url):
         ships_common = data
         ships_total = dict(sorted(ships_common['ships_useful'].items(), key=lambda x: x[1][0], reverse=True))
         types_total = dict(sorted(ships_common['types_total'].items(), key=lambda x: x[1][0], reverse=True))
-        chart_data = {'data': [], 'labels': []}
+        chart_data = {'data': [], 'labels': [], 'colors': []}
         for key, value in types_total.items():
             chart_data["labels"].append(key)
             chart_data["data"].append(value[0])
+        hex_colors = get_random_colors(len(chart_data["data"]))
 
-        # r.mset({'chart': f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}'})
-        # можно сразу в строку
-        chart = f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}'
+        chart = f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}, "colors":{json.dumps(hex_colors)}'
         chart_data = json.dumps(chart)
 
         types_num = len(ships_total)
         ships_num = sum([i[0] for i in ships_total.values()])
         url_name = f"/{ships_common['url']}"
         exec_time = round(time.time() - start_time, 3)
+
         return render_template('shipDb.html', title=f"{ships_num} ships in system", exec_time=exec_time, ships_total= ships_total, types_total= types_total, url=url_name,
                                current_time = current_time, scan_time = scan_time,
                                scan_date = scan_date, time_delta = time_delta,
