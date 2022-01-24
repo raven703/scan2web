@@ -15,17 +15,14 @@ db.create_all()
 
 @app.route('/progress')
 def progress():
-
-
-
-    def generate():
-        while True:
-            chart_data = r.get("chart").decode("utf8")
-            esi_query = '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}'
-            yield f"data: {esi_query}, {chart_data} " + "}\n\n"
-            time.sleep(0.9)
-
-    return Response(generate(), mimetype='text/event-stream')
+    esi_query = '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}'
+    result = f"data: {esi_query}" + "}\n\n"
+    # def generate():
+    #
+    #     esi_query = '{' + f'"max":{r.get("max").decode("utf8")}, "current":{r.get("current").decode("utf8")}'
+    #     yield f"data: {esi_query}" + "}\n\n"
+    # return Response(generate(), mimetype='text/event-stream')
+    return Response(result, mimetype='text/event-stream')
 
 
 
@@ -96,6 +93,9 @@ def scan_url(url):
             chart_data["data"].append(value[0])
 
         r.mset({'chart': f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}'})
+        # можно сразу в строку
+        chart_data = json.dumps(r.get("chart").decode("utf8"))
+
 
         types_num = len(ships_total)
 
@@ -107,7 +107,10 @@ def scan_url(url):
                                scan_date = scan_date, time_delta = time_delta,
                                types_num = types_num,
                                ships_num = ships_num,
-                               ships_common=ships_common)
+                               ships_common=ships_common,
+                               chart_data = chart_data
+
+                               )
     else:
 
         total_alliance = dict(sorted(data['alliances'].items(), key=lambda x: x[1].get('count'), reverse=True))

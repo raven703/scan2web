@@ -1,23 +1,40 @@
-$(function () {
+$(function() {
+    console.log("ready func")
 
-    console.log('TEST from chart.js');
-console.log("chartdata2 chart.js", chartData2);
-    drawChart();
+    let attrdata  = $("#chartData").attr('data-chart');
 
+    let data2 = '{' + JSON.parse(attrdata) + '}'
+ let dataset = JSON.parse(data2)
+
+    let chartData = dataset["c_data"];
+	let chartLabels = dataset["labels"];
+     console.log("chart data is:", chartData);
+     console.log("chart lables is:", chartLabels);
+     drawChart(chartData, chartLabels);
 })
 
-function drawChart()
+
+
+function drawChart(chartData, chartLabels)
 {
     const ctx = document.getElementById('myChart').getContext('2d');
-    console.log(ctx)
+
     const myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: chartLabels2,
+            labels: chartLabels,
             datasets: [{
-                data: chartData2,
+                data: chartData,
+                backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
             }],
-            labels: ['a', 'b']
+            labels: chartLabels
         },
         options: {
             responsive: true,
