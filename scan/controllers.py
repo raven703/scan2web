@@ -92,9 +92,11 @@ def scan_url(url):
             chart_data["labels"].append(key)
             chart_data["data"].append(value[0])
 
-        r.mset({'chart': f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}'})
+        # r.mset({'chart': f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}'})
         # можно сразу в строку
-        chart_data = json.dumps(r.get("chart").decode("utf8"))
+        chart = f'"c_data":{chart_data["data"]}, "labels":{json.dumps(chart_data["labels"])}'
+        chart_data = json.dumps(chart)
+
 
 
         types_num = len(ships_total)

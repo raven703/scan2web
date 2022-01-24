@@ -136,7 +136,7 @@ def check_chars_from_local(data: str):
 
     if len(request_list) > 0:
 
-        request_list = list(chunc(request_list, 25))
+        request_list = list(chunc(request_list, 35))
         proc_value = 100 // len(request_list)
         counter = 0
 
@@ -157,7 +157,7 @@ def check_chars_from_local(data: str):
                         db.session.add(u)
                         db.session.commit()
                     elif "corporation_id" in list(char_info):
-                        print(char_info)
+                        # print(char_info)
                         u = UserDB(uid=slovar['id'], name=slovar['name'], c_id=char_info.corporation_id)
                         db.session.add(u)
                         db.session.commit()
@@ -171,7 +171,7 @@ def check_chars_from_local(data: str):
 def get_chars_from_local(data: str):  # возвращает ID перс. из локала, преобразует их в формат ПОСТ запроса
     #  на входе строка из имён
     raw_data = list(set([i for i in data.replace('\r', '').split('\n') if len(i) > 0]))
-    print(f'before conversion: {raw_data}')
+    # print(f'before conversion: {raw_data}')
     request_data = []
     exist_data = []
     cid_list = []
@@ -183,7 +183,7 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
 
         else:
             exist_data.append(name)
-            print(user.name, user.uid)
+            # print(user.name, user.uid)
 
     data = convert_to_tranq_post(request_data)  # преобразование в формат пост запроса сервера. передаётся список
     # неизвестных имён
@@ -191,7 +191,7 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
     if len(request_data) > 0:
         uid_data_req = requests.post('https://esi.evetech.net/latest/universe/ids/', headers=headers, params=params,
                                      data=data).json()
-        print(f'total requests from server {len(uid_data_req)}')
+        # print(f'total requests from server {len(uid_data_req)}')
     else:
         uid_data_req = []
     # print(f'server answer universe IDs {uid_data}')
@@ -203,7 +203,7 @@ def get_chars_from_local(data: str):  # возвращает ID перс. из �
             db.session.commit()
 
     if len(exist_data) > 0:
-        print(f'total requests from DB {len(exist_data)}')
+        # print(f'total requests from DB {len(exist_data)}')
         for name in exist_data:
             user = UserDB.query.filter(UserDB.name == name).first()
             cid_list.append(user.uid)

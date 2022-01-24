@@ -1,16 +1,19 @@
 $(function() {
-    console.log("ready func")
+
 
     let attrdata  = $("#chartData").attr('data-chart');
 
-    let data2 = '{' + JSON.parse(attrdata) + '}'
- let dataset = JSON.parse(data2)
+    if (typeof attrdata !== 'undefined') {
+        let data2 = '{' + JSON.parse(attrdata) + '}'
+        let dataset = JSON.parse(data2)
 
-    let chartData = dataset["c_data"];
-	let chartLabels = dataset["labels"];
-     console.log("chart data is:", chartData);
-     console.log("chart lables is:", chartLabels);
-     drawChart(chartData, chartLabels);
+        let chartData = dataset["c_data"];
+	    let chartLabels = dataset["labels"];
+     // console.log("chart data is:", chartData);
+     // console.log("chart lables is:", chartLabels);
+        drawChart(chartData, chartLabels);
+    }
+
 })
 
 
